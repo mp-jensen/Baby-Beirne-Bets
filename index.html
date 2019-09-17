@@ -11,14 +11,15 @@
     <title>Baby Beirne Bets</title>
     <style>
         .carousel-inner img {
-            height: 400px;
+            height: 500px;
             object-fit: contain;
-            background: #6c757d;
+            background: #9d9d9d ;
+            border-style: outset;
         }
     
     </style>
     <span class="container">
-      <nav class="navbar navbar-dark bg-primary fixed-top">
+      <nav class="navbar navbar-dark fixed-top" style="background:#83d4be; border-style: outset">
         <a class="navbar-brand" href="#">Baby Beirne Bets</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -26,19 +27,19 @@
         <div class="collapse navbar-collapse" id="navContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home </a>
+              <a class="nav-link" href="#homeLink">Home </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#">About </a>
+              <a class="nav-link" href="#aboutLink">About </a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#">Enter New Bet</a>
+              <a class="nav-link" href="#newBetLink">Create A New Bet</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#">Find Existing Bet</a>
+              <a class="nav-link" href="#logInLink">Log In</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link disabled" href="#" aria-disabled="true">Results</a>
+              <a class="nav-link disabled" href="#resultsLink" aria-disabled="true">Results</a>
             </li>
           </ul>
           </div>
@@ -46,7 +47,7 @@
       </span>
       
   </head>
-  <body style="padding-top:12.5px">
+  <body style="padding-top:15px" background="backgroundCrop.jpg" id="homeLink">
   <span class="container">
     <div id="frontPageCarousel" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -73,7 +74,7 @@
           <img src="ashaAndDan5.jpg" class="d-block w-100 img-fluid" alt="Beirne Baby Bets">
         </div>
         <div class="carousel-caption d-none d-md-block">
-          <h1>Beirne Baby Bets</h1>
+          <h1>Baby Beirne Bets</h1>
           <p>This baby is on the way whether you are ready or not, now lets have some friendly competitive fun while we wait!</p>
         </div>
       </div>
@@ -87,12 +88,32 @@
       </a>
     </div>
   </span>
+  <a id="aboutLink"></a>
   <br>
+  <br>
+<br>
+  <div class="container">
+    <div class="row" style="background:#fe6c99; border-style:outset">
+      <div class="col-12">
+        <h1 class="text-center">About Baby Beirne Bets</h1>
+      </div>
+      <div class="col-md-4 col-xs-12">
+        <img src="ultrasoundPH.jpg">
+      </div>
+      <div class="col-md-8 col-xs-12">
+        <p>While we not so patiently await the arrival of Baby Beirne, we thought we could have a bit of fun with the waiting and wondering game. While you wait, take some time to place bets on any and all possibile characteristics of the baby! Currently there are 7 data points you can bet on - the baby's weight, height, gender, birth date, birth time, hair color and eye color. In order to secure your bet for each aspect, first place your guess online then venmo Auntie Manda @Manda-Phadke $1 for each aspect you would like to place a bet on. Make sure you include the email you used and which aspects you are placing bets on! When the baby arrives the winners will split the pot of the winnings (unless of course you'd like to purchase a diaper or two for the new parents, we can arrange that too, I'm sure they will need it!). Winners will be emailed and posted on the Results page when the information is available. This is all for fun to pass the time, so join us and enjoy the wait! </p>     
+      </div>
+    </div>
+  </div>
+<a id="newBetLink"></a>
+<br>
+<br>
+<br>
 
   <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-xs-10 align-self-center">
-        <legend>Create a New Bet</legend>
+    <div class="row" id="createNewBet" style="background:#c6d14f; border-style: outset">
+      <div class="col-lg-8 col-xs-10 text-center">
+        <h1>Create a New Bet</h1>
         <div class="form-group">          
           <label>Username (required, must be unique): <input type='text' id='newUserName' required></label><br>
           <label>Password (required, used to access your guesses): <input type="text" id='newKeyword' required></label><br><br>
@@ -100,6 +121,7 @@
         </div>
         <div class="form-group">
           <label>Baby's weight at birth: <input type='number' id='newWeightLb' min='0' max='125'>lbs </label><label><input type='number' id='newWeightOz' min='0' max='16'>oz </label><br><br>
+          <label>Baby's height at birth: <input type='number' id='newHeightIn' min='0' max='36'>inches </label><br><br>
           <label>Baby's Gender:<br>
           <input type='radio' name='gender' id='newMale' value='0'> Male<br>
           <input type='radio' name='gender' id='newFemale' value='1'> Female</label><br><br>
@@ -113,6 +135,7 @@
           <input type='radio' name='newHair' id='hairBlonde' value='2'> Blonde<br>
           <input type='radio' name='newHair' id='hairBlack' value='3'> Black<br>
           <input type='radio' name='newHair' id='hairRed' value='4'> Red<br>
+          <input type='radio' name='newHair' id='hairBald' value='5'> Bald<br>
           </label><br><br>
           <label>Baby's Eye Color: <br>
           <input type='radio' name='newEye' id='eyeDBrown' value='0'> Dark Brown<br>
