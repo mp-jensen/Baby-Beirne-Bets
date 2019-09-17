@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Baby Beirne Bets</title>
+        <style type="text/css"></style>
+    </head>
+    <body>
+        <h1>Baby Beirne Bets</h1>
+        <p>While we not so patiently await the arrival of Baby Beirne, take some time to place bets on any and all possibile characteristics of the baby!</p>
+        
+        <h2>How It Works</h2>
+        <p>Enter a username and keyword to keep your guesses secret then add your guess. There is a betting pool to go along with the guesses (would it be fun if there weren't?). Venmo @Manda-Phadke directly $1 for each category you are making a bet in (eg. $1 for weight, $1 for length . . . etc) and include the username you have selected.</p>
+
+        <h2>Enter Your Bets Below</h2>
+        <p>Insert the values you would like to make for each category. You can bet more than once under different usernames. Make sure to venmo for each bet that you would like entered.</p>
+
+        <form id='addBet' method='POST'>
+            <fieldset>
+                <legend>Create a New Bet</legend>           
+                <label>Username (required, must be unique): <input type='text' id='newUserName' required></label><br>
+                <label>Password (required, used to access your guesses): <input type="text" id='newKeyword' required></label><br><br>
+                <label>Email (required): <input type='text' id='newEmail' required></label>
+                <label>Baby's weight at birth: <input type='number' id='newWeightLb' min='0' max='125'>lbs </label><label><input type='number' id='newWeightOz' min='0' max='16'>oz </label><br><br>
+                <label>Baby's Gender:<br>
+                <input type='radio' name='gender' id='newMale' value='0'> Male<br>
+                <input type='radio' name='gender' id='newFemale' value='1'> Female</label><br><br>
+                <label>Baby's Birth Date: <input type='date' id='newDate' min='2020-01-01' max='2020-05-30'></label><br><br>
+                <label>Baby's Birth Time - both hour and minute must be sumbitted, hour is on a 0-24 scale</label><br>
+                <label>Baby's Birth Hour: <input type='number' id='newHour' min='0' max='24'></label><br>
+                <label>Baby's Birth Minute: <input type='number' id='newMinute' min='0' max='60'></label><br><br>
+                <label>Baby's Hair Color: <br>
+                <input type='radio' name='newHair' id='hairDBrown' value='0'> Dark Brown<br>
+                <input type='radio' name='newHair' id='hairLBrown' value='1'> Light Brown<br>
+                <input type='radio' name='newHair' id='hairBlonde' value='2'> Blonde<br>
+                <input type='radio' name='newHair' id='hairBlack' value='3'> Black<br>
+                <input type='radio' name='newHair' id='hairRed' value='4'> Red<br>
+                </label><br><br>
+                
+                <label>Baby's Eye Color: <br>
+                <input type='radio' name='newEye' id='eyeDBrown' value='0'> Dark Brown<br>
+                <input type='radio' name='newEye' id='eyeLBrown' value='1'> Light Brown<br>
+                <input type='radio' name='newEye' id='eyeBlue' value='2'> Blue<br>
+                <input type='radio' name='newEye' id='eyeGreen' value='3'> Green<br>
+                <input type='radio' name='newEye' id='eyeHazel' value='4'> Hazel<br>
+                </label><br><br>
+                <input type='submit' name='submit' value='Submit Bet' id='submitBet'><br>
+            </fieldset>
+        </form>
+        <br>
+    </body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>title</title>
+  <link rel="stylesheet" href="style.css">
+ </head>
+ <body>
+     <table>
+         <caption>Table of Weekly Activities</caption>
+         <thead>
+            <tr>
+                <th></th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr> 
+         </thead>
+         <tbody>
+             <tr class="bodyRow">
+                 <td class="rowHdr">Wakeup Time</td>
+                 <td>7:00 AM</td>
+                 <td>4:40 AM</td>
+                 <td>5:30 AM</td>
+                 <td>7:00 AM</td>
+                 <td>4:40 AM</td>
+             </tr>
+             <tr class="bodyRow">
+                 <td class="rowHdr">Morning Workout</td>
+                 <td>Yoga at Home</td>
+                 <td>Swim at Gym</td>
+                 <td>Yoga at Gym</td>
+                 <td>Yoga at Home</td>
+                 <td>Swim at Gym</td>           
+             </tr>
+             <tr class="bodyRow">             
+                 <td class="rowHdr">Afternoon Workout</td>
+                 <td>Rest Day</td>
+                 <td>Weights at Gym</td>
+                 <td>Run with Erik</td>
+                 <td>Yoga at Home</td>
+                 <td>Weights at Gym</td>
+             </tr>
+             <tr class="bodyRow">
+                 <td class="rowHdr">Bedtime</td>
+                 <td>9:30 PM</td>
+                 <td>9:30 PM</td>
+                 <td>9:30 PM</td>
+                 <td>11:30 PM</td>
+                 <td>Det. by Social Cal.</td>
+             </tr>
+             <tr>
+                 <td colspan="2">Weekend Schedule</td>
+                 <td colspan="4">Get in 2 workouts, avg 8 hr/night sleep</td>
+             </tr>
+         </tbody>
+     </table>
+
+     <p>Weekend Workouts (in order of preference)</p>
+     <ol>
+         <li>Outdoor Bike</li>
+         <li>Yoga Sculpt</li>
+         <li>Long Run</li>
+     </ol>
+  
+     <div class="outer-content"> 
+         <br>
+         <br>
+         <div class = "inner-content">Pretty Text Box</div>
+     </div>
+
+     <form action="http://web.engr.oregonstate.edu/~zhangluy/tools/class-content/form_tests/check_request.php" method="GET">
+         <fieldset>
+             <legend>GET Data (data will be published in URL)</legend>
+             <fieldset>
+                    <label>Text input: <input type="text" name="text_input" size="40" maxlength="100"></label>
+                    <br>
+             </fieldset>
+             <fieldset>
+                 <label>Numerical input: <input type="number" name="numerical_input" size="5" min="-9999" max="99999"></label>
+                 <br>
+             </fieldset>
+             <fieldset>
+                 <label>Password input: <input type="password" name="password_input" size="20" min="6" max="21"></label>
+                 <br>
+             </fieldset>
+             <fieldset>
+                 <label>Candy selection:<br>
+                     <input type="radio" name="candy" value="Snickers">Snickers<br>
+                     <input type="radio" name="candy" value="Skittles">Skittles<br>
+                     <input type="radio" name="candy" value="Mentos">Mentos<br>
+                 </label>
+             </fieldset>
+             <input type="submit" value="Submit Form">
+        </fieldset>
+     </form>
+
+     <br>
+
+     <form action="http://web.engr.oregonstate.edu/~zhangluy/tools/class-content/form_tests/check_request.php" method="POST">
+        <fieldset>
+            <legend>POST Data (data will NOT be published in URL)</legend>
+            <fieldset>
+                   <label>Text input: <input type="text" name="text_input" size="40" maxlength="100"></label>
+                   <br>
+            </fieldset>
+            <fieldset>
+                <label>Numerical input: <input type="number" name="numerical_input" size="5" min="-9999" max="99999"></label>
+                <br>
+            </fieldset>
+            <fieldset>
+                <label>Password input: <input type="password" name="password_input" size="20" min="6" max="21"></label>
+                <br>
+            </fieldset>
+            <fieldset>
+                <label>Candy selection:<br>
+                    <input type="radio" name="candy" value="Snickers">Snickers<br>
+                    <input type="radio" name="candy" value="Skittles">Skittles<br>
+                    <input type="radio" name="candy" value="Mentos">Mentos<br>
+                </label>
+            </fieldset>
+            <input type="submit" value="Submit Form">
+       </fieldset>
+    </form>
+
+ </body>
+
+</html>
