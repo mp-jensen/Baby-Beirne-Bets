@@ -1,0 +1,43 @@
+<!-- 
+  Author: Manda Jensen
+  Program: Baby-Beirne-Bets
+  Date: 1/16/2020
+ -->
+
+<!DOCTYPE html>
+<html>  
+  <head>
+    <meta charset="UTF-8">
+    <title>BabyBets - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+
+    <!-- Raleway font from Google -->
+    <!-- https://fonts.google.com/specimen/Raleway?selection.family=Raleway -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+    
+    <!-- Header -->
+    <div class="header">
+      <h1>Baby Beirne Bets</h1>
+      <div id="header-line">
+        <h4 class='header-subtext'>Baby Beirne is on the way, lets have some friendly competitive fun while we wait!</h4>
+        <br>
+    </div>
+
+    <!-- Navbar -->
+    <nav id="navbar">
+      <ul>
+        <li><a href="/welcome">Welcome</a></li>
+        <li><a href="/placeBets">Place Bets</a></li>
+        <li><a href="/viewBets">View My Bets</a></li>
+        <li><a href="/viewAllBets">View All Bets</a></li>
+      </ul>
+    </nav>
+
+    <!-- Individual Page Content Will Go Here -->
+    {% block content %}{% endblock %}
+
+  </body>
+</html>
