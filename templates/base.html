@@ -8,7 +8,7 @@
 <html>  
   <head>
     <meta charset="UTF-8">
-    <title>BabyBets - {% block title %}{% endblock %}</title>
+    <title>Baby Beirne Bets - {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 
     <!-- Raleway font from Google -->
@@ -19,20 +19,19 @@
   <body>
     
     <!-- Header -->
-    <div class="header">
+    <div class="jumboron text-center">
       <h1>Baby Beirne Bets</h1>
-      <div id="header-line">
-        <h4 class='header-subtext'>Baby Beirne is on the way, lets have some friendly competitive fun while we wait!</h4>
+        <p class='header-subtext'>Baby Beirne is on the way, lets have some friendly competitive fun while we wait!</p>
         <br>
     </div>
 
     <!-- Navbar -->
-    <nav id="navbar">
-      <ul>
-        <li><a href="/welcome">Welcome</a></li>
-        <li><a href="/placeBets">Place Bets</a></li>
-        <li><a href="/viewBets">View My Bets</a></li>
-        <li><a href="/viewAllBets">View All Bets</a></li>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link active" href="/welcome">Welcome</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/placeBets">Place Bets</a></li class="nav-item">
+        <li class="nav-item"><a class="nav-link active" href="/viewBets">View My Bets</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/viewAllBets">View All Bets</a></li class="nav-item">
       </ul>
     </nav>
 
