@@ -5,8 +5,8 @@ from flask import request
 app = Flask (__name__)
 
 @app.route('/')
-def homepage():
+def welcome():
     #temporary page to test herokuapp connection
-    return 'Hello Baby Beirne Bets!'
+    return render_template('welcome.html')
 
 if __name__ == '__main__': app.run(debug=True)
