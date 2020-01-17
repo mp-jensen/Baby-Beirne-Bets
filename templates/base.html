@@ -26,6 +26,7 @@
       /*Remove jumbotron's default bottom margin */
       .jumbotron {
         margin-bottom: 0;
+
       }
       /*Remove navbar default orunded borders and bottom margin*/
       .navbar {
@@ -50,7 +51,7 @@
 
     <!-- Header -->
     <div class="container-fluid">
-      <div class="jumbotron text-center">
+      <div class="jumbotron-fluid text-center">
         <h1>Baby Beirne Bets</h1>
           <p class='header-subtext'>Baby Beirne is on the way, lets have some friendly competitive fun while we wait!</p>
           <br>
@@ -61,14 +62,21 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#homeNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
           <p class="navbar-brand">Baby Beirne Bets</p>
         </div>
+        <div class="collapse navbar-collapse" id="homeNavbar">
         <ul class="nav navbar-nav">
           <li class="active"><a class="nav-link active" href="/welcome">Welcome</a></li>
           <li><a class="nav-link active" href="/placeBets">Place Bets</a></li class="nav-item">
-          <li><a class="nav-link active" href="/viewBets">View My Bets</a></li>
+          <li><a class="nav-link active" href="/viewMyBets">View My Bets</a></li>
           <li><a class="nav-link active" href="/viewAllBets">View All Bets</a></li class="nav-item">
         </ul>
+        </div>
       </div>
     </nav>
 
