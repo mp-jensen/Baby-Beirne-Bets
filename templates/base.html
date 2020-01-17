@@ -23,17 +23,22 @@
     <!-- https://fonts.google.com/specimen/Raleway?selection.family=Raleway -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100&display=swap" rel="stylesheet">
     <style>
+      /*Remove jumbotron's default bottom margin */
+      .jumbotron {
+        margin-bottom: 0;
+      }
+      /*Remove navbar default orunded borders and bottom margin*/
       .navbar {
         margin-bottom: 0;
         border-radius: 0;
       }
-
+      /*Adjust carousel image size*/
       .carousel-inner img {
         width: 100%;
         margin:auto;
         min-height: 200px;
       }
-
+      /*Remove carousel-captions on small screens*/
       @media (max-width: 600px) {
         .carousel-caption {
           display: none;
