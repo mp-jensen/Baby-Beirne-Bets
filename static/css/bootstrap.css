@@ -61,7 +61,8 @@ body {
   color: #212529;
   text-align: left;
   background-color: #fff;
-  //background-image: url("../img/whalelight.jpg");
+  background-image: url("../images/forestAnimals.JPG");
+  background-repeat: repeat;
   height: 100%;
 
   background-repeat: no-repeat;
