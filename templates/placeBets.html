@@ -11,25 +11,42 @@
 </div>
 
 <div class="container">
-    <div class="well-lg text-md-center">
-        <div class="page-header">
-            <h2>Instructions</h2>
-        </div>
-        <p>Type in your email then press submit. The characteristics you are eligible to bet on will appear below your email. Enter the bets you would like to place and submit. To view all of the bets you currently have placed, go to the View My Bets page and enter the email you used to place the bets.</p>
+    <div class="page-header">
+        <h2>Instructions</h2>
     </div>
+    <p>Type in your email then press submit. The characteristics you are eligible to bet on will appear below your email. Enter the bets you would like to place and submit. To view all of the bets you currently have placed, go to the View My Bets page and enter the email you used to place the bets.</p>
+</div>
+
+{% if email %}
+<div class="container">
+    <div class="page-header">
+        <h2>Place Bets with Email: {{ email }}</h2>
+    </div>
+    <h3>To place bets with a different email click <a href="/placeBets">here</a></h3>
 </div>
 
 <div class="container">
-    <div class="page-header">
-        <h2>Enter Email to Place Bets With</h2>
-    </div>
-    <form action="/placeBets">
+    <form action="/betsPlaced" method="POST">
         <div class="form-group">
-            <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="email">
+            <input type="email" value={{email}} id="submitEmail" hidden>
+            
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </div>
-  
+
+{% else %}
+    <div class="container">
+        <div class="page-header">
+            <h2>Enter Email to Place Bets With</h2>
+        </div>
+        <form action="/placeBets" method="POST">
+            <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control" id="newEmail">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+{% endif %}
+
 {% endblock %}
