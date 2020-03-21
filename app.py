@@ -10,7 +10,7 @@ def welcome():
     #temporary page to test herokuapp connection
     return render_template('welcome.html')
 
-@app.route('/placeBets', methods=["POST","GET"]) 
+@app.route('/placeBets')
 def placeBets():
     if request.method == "GET":
         return render_template('placeBets.html')
