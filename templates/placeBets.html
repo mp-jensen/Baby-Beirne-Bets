@@ -4,49 +4,157 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="page-header">
-      <h1>Place Bets</h1>
-    </div>
-</div>
-
-<div class="container">
-    <div class="page-header">
-        <h2>Instructions</h2>
-    </div>
-    <p>Type in your email then press submit. The characteristics you are eligible to bet on will appear below your email. Enter the bets you would like to place and submit. To view all of the bets you currently have placed, go to the View My Bets page and enter the email you used to place the bets.</p>
-</div>
-
-{% if email %}
-<div class="container">
-    <div class="page-header">
-        <h2>Place Bets with Email: {{ email }}</h2>
-    </div>
-    <h3>To place bets with a different email click <a href="/placeBets">here</a></h3>
-</div>
-
-<div class="container">
-    <form action="/betsPlaced" method="POST">
-        <div class="form-group">
-            <input type="email" value={{email}} id="submitEmail" hidden>
-            
-        </div>
-    </form>
-</div>
-
-{% else %}
     <div class="container">
         <div class="page-header">
-            <h2>Enter Email to Place Bets With</h2>
+          <h1>Place Bets</h1>
         </div>
-        <form action="/placeBets" method="POST">
-            <div class="form-group">
-                <label for="email">Email address:</label>
-                <input type="email" class="form-control" id="newEmail">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
     </div>
-{% endif %}
 
+    <div class="container">
+        <div class="page-header">
+            <h3>Instructions</h3>
+        </div>
+        <p>
+            If you have already placed bets with your email, enter your email below. If you have not placed bets with your email yet, please enter your name and email below.<br>
+            Once your email has been registered, enter the registered email then enter the bets you would like to place and submit.<br>
+            Each email can only be associated with one bet of each type. To view all of the bets you currently have placed, go to the View My Bets page and enter the email you used to place the bets.
+        </p>
+    </div>
+
+
+    {% if email %}
+        <div class="container">
+            <div class="page-header">
+                <h2>Place Bets with Email: {{ email }}</h2>
+            </div>
+            <h3>To place bets with a different email click <a href="/placeBets">here</a></h3>
+        </div>
+
+    {%  elif newEmail %}
+        <div class="container">
+            <div class="page-header">
+                <h2>Place Bets with Email: {{ newEmail }}</h2>
+            </div>
+            <h3>To place bets with a different email click <a href="/placeBets">here</a></h3>
+        </div>
+
+    {% else %}
+        <div class="container">
+            <div class="page-header">
+                <h2>Enter Email to Place Bets With</h2>
+            </div>
+            <form action="/placeBets" method="POST">
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" id="newEmail" placeholder="E-mail">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    {% endif %}
+
+    {% if email or newEmail %}
+        <div class="container">
+            <form class="border border-light p-5" action="/betsPlaced" method="POST">
+                <p class="h4 mb-4 text-center">Place Bets</p>
+                <div class="form-group">
+                    {% if email %}
+                        <input type="email" value={{ email }} id="submitEmail" hidden>
+                        <input type="userID" value={{ userID }} id="userID" hidden>
+                    {% else %}
+                        <input type="email" value={{ newEmail }} id="submitEmail" hidden>
+                        <div class="border border-light p-5">
+                            <p class="h5 mb-4 text-center">Enter User's Information</p>
+                            <label for="firstName" class="active">First Name</label>
+                            <input type="text" id="firstName" class="form-control mb-4" placeholder="Enter user's first name" required>
+
+                            <label for="lastName" class="active">Last Name</label>
+                            <input type="text" id="lastName" class="form-control mb-4" placeholder="Enter user's last name" required>
+                        </div>
+                    {% endif %}
+                    <div class="border border-light p-5">
+                        <p class="h5 mb-4 text-center">Enter Bets</p>
+                        {% if user_bDate %}
+                            <label for="birthDate" class="active">Birth Date</label>
+                            <select class="browser-default custom-select mb-4" id="birthDate">
+                                <option value="" disabled="" selected="">Choose the date</option>
+                                {% for day in date %}
+                                    <option value="{{ day[0] }}">{{ day[1] }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                        {% if user_bTime %}
+                            <label for="birthHour" class="active">Birth Time</label>
+                            <select class="browser-default custom-select mb-4" id="birthHour">
+                                <option value="" disabled="" selected="">Hour</option>
+                                {% for time in hour %}
+                                    <option value="{{ time[0] }}">{{ time[1] }}</option>
+                                {% endfor %}
+                            </select>
+                            <select class="browser-default custom-select mb-4" id="birthMinute">
+                                <option value="" disabled="" selected="">Minute</option>
+                                {% for time in minute %}
+                                    <option value="{{ time[0] }}">{{ time[1] }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                        {% if user_bWeight %}
+                            <label for="birthLb" class="active">Birth Weight</label>
+                            <select class="browser-default custom-select mb-4" id="birthLb">
+                                <option value="" disabled="" selected="">Pounds</option>
+                                {% for weight in lb %}
+                                    <option value="{{ weight[0] }}">{{ weight[1] }}</option>
+                                {% endfor %}
+                            </select>
+                            <select class="browser-default custom-select mb-4" id="birthOz">
+                                <option value="" disabled="" selected="">Ounces</option>
+                                {% for weight in oz %}
+                                    <option value="{{ weight[0] }}">{{ weight[1] }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                        {% if user_bLength %}
+                            <label for="birthLength" class="active">Birth Length</label>
+                            <select class="browser-default custom-select mb-4" id="birthLength">
+                                <option value="" disabled="" selected="">Inches</option>
+                                {% for length in inches %}
+                                    <option value="{{ length[0] }}">{{ length[1] }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                        {% if user_bHair %}
+                            <label for="birthHair" class="active">Birth Hair Color</label>
+                            <select class="browser-default custom-select mb-4" id="birthHair">
+                                <option value="" disabled="" selected="">Color</option>
+                                {% for color in hair %}
+                                    <option value="{{ color[0] }}">{{ color[1] }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                        {% if user_bFName %}
+                            <label for="birthFN" class="active">Baby's First Name Initial</label>
+                            <select class="browser-default custom-select mb-4" id="birthFN">
+                                <option value="" disabled="" selected="">Initial</option>
+                                {% for initial in FNletter %}
+                                    <option value="{{ initial[0] }}">{{ initial[1] }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                        {% if user_bMName %}
+                            <label for="birthMN" class="active">Baby's Middle Name Initial</label>
+                            <select class="browser-default custom-select mb-4" id="birthMN">
+                                <option value="" disabled="" selected="">Initial</option>
+                                {% for initial in MNletter %}
+                                    <option value="{{ initial[0] }}">{{ initial[1] }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                    </div>
+
+                    <button class="btn btn-info btn-block" type="submit" id="submitBet">Submit Bets</button>
+
+                </div>
+            </form>
+        </div>
+    {% endif %}
 {% endblock %}
