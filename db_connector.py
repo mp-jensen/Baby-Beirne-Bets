@@ -1,9 +1,9 @@
 import MySQLdb as mariadb
-from boto3.s3.connection import S3Connection
+import boto3
 
 # get environment variables from heroku to connect to the database
 
-s3 = S3Connection(os.environ['S3_KEY'], os.environ['S3_SECRET'])
+s3 = boto3.client('s3')
 db_url = s3['CLEARDB_DATABASE_URL']
 
 db_url.replace('/',' ').replace(':',' ').replace('@',' ').replace('?',' ').split()
