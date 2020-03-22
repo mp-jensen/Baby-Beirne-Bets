@@ -7,11 +7,14 @@ app = Flask (__name__)
 
 @app.route('/')
 def welcome():
-    #temporary page to test herokuapp connection
+    print("I am in the welcome route")
+    print(request)
     return render_template('welcome.html')
+
 
 @app.route('/placeBets')
 def placeBets():
+    print("I am in the placeBets route")
     if request.method == "GET":
         return render_template('placeBets.html')
 
