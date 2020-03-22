@@ -1,5 +1,5 @@
 import MySQLdb as mariadb
-from boto.s3.connection import S3Connection
+from boto3.s3.connection import S3Connection
 
 # get environment variables from heroku to connect to the database
 

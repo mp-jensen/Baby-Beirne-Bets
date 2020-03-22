@@ -2,3 +2,4 @@ Flask
 Flask-RESTful
 gunicorn
 mysqlclient
+boto3
