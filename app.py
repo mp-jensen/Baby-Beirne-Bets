@@ -7,7 +7,6 @@ app = Flask (__name__)
 
 @app.route('/')
 def welcome():
-    print("I am in the welcome route")
     print(request)
     return render_template('welcome.html')
 
@@ -16,6 +15,7 @@ def welcome():
 def placeBets():
     print("I am in the placeBets route")
     if request.method == "GET":
+        print("request method was GET")
         return render_template('placeBets.html')
 
     # initalize all variables needed if it was a POST request
@@ -39,10 +39,11 @@ def placeBets():
     FNletter = (None,)
     MNletter = (None,)
 
-    if 'newEmail' in request.form:
+    print("Request.form contains the following: {0}".format(request.form))
+    if 'email' in request.form:
         dbConnection = connect_to_database()
         query = 'SELECT userID FROM users WHERE email=%s;'
-        testEmail = (request.form['newEmail'],)
+        testEmail = (request.form['email'],)
         user = execute_query(dbConnection, query, testEmail)
         # check if the email is already registered to a user, if not, prompt for user info along with
         # prompting for all bets
