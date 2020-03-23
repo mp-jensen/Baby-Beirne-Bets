@@ -98,6 +98,7 @@ def placeBets():
             lb = execute_query(dbConnection, query).fetchall()
             query = 'SELECT bOzID, oz FROM bOz;'
             oz = execute_query(dbConnection, query).fetchall()
+            print("oz request return: {0}".format(oz))
         if user_bLength:
             query = 'SELECT bLengthID, inches FROM bLength;'
             inches = execute_query(dbConnection, query).fetchall()
