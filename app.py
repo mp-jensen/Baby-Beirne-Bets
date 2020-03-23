@@ -142,7 +142,8 @@ def betsPlaced():
     if 'userID' in request.form:
         userID = request.form['userID']
     elif 'submitEmail' in request.form:
-        userData = (request.form['submitEmail'], request.form['firstName'], request.form['lastName'])
+        print("Request form in place bets: {0}".format(request.form))
+        userData = (request.form['firstName'], request.form['lastName'], request.form['submitEmail'])
         query = "INSERT INTO users (firstName, lastName, email) VALUES (%s, %s, %s);"
         execute_query(dbConnection, query, userData)
         email = (request.form['submitEmail'],)
