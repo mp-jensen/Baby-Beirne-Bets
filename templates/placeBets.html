@@ -25,7 +25,7 @@
     {% if email %}
         <div class="container">
             <div class="page-header">
-                <h2>Place Bets with Email: {{ email }}</h2>
+                <h2>Place Bets with Email: {{ email[0] }}</h2>
             </div>
             <h3>To place bets with a different email click <a href="/placeBets">here</a></h3>
         </div>
@@ -33,7 +33,7 @@
     {%  elif newEmail %}
         <div class="container">
             <div class="page-header">
-                <h2>Place Bets with Email: {{ newEmail }}</h2>
+                <h2>Place Bets with Email: {{ newEmail[0] }}</h2>
             </div>
             <h3>To place bets with a different email click <a href="/placeBets">here</a></h3>
         </div>

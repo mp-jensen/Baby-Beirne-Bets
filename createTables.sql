@@ -115,11 +115,11 @@ CREATE TABLE `winners` (
 CREATE TABLE `user_bDate` (
   `userID` INT NOT NULL,
   `bDateID` INT NOT NULL,
-  `amountBet` INT NOT NULL,
+  `amountBet` INT NOT NULL DEFAULT 2,
   `amountPaid` INT NOT NULL DEFAULT 0,
   `paidStatus` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`userID`),
-  FOREIGN KEY (`userID`) REFERENCES users(`userID`),
+  FOREIGN KEY (`userID`) REFERENCES users(`userID`) ON DELETE CASCADE,
   FOREIGN KEY (`bDateID`) REFERENCES bDate(`bDateID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -128,11 +128,11 @@ CREATE TABLE `user_bTime` (
   `userID` INT NOT NULL,
   `bHourID` INT NOT NULL,
   `bMinuteID` INT NOT NULL,
-  `amountBet` INT NOT NULL,
+  `amountBet` INT NOT NULL DEFAULT 2,
   `amountPaid` INT NOT NULL DEFAULT 0,
   `paidStatus` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`userID`),
-  FOREIGN KEY (`userID`) REFERENCES users(`userID`),
+  FOREIGN KEY (`userID`) REFERENCES users(`userID`) ON DELETE CASCADE,
   FOREIGN KEY (`bHourID`) REFERENCES bHour(`bHourID`),
   FOREIGN KEY (`bMinuteID`) REFERENCES bMinute(`bMinuteID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -141,11 +141,11 @@ CREATE TABLE `user_bWeight` (
   `userID` INT NOT NULL,
   `bLbID` INT NOT NULL,
   `bOzID` INT NOT NULL,
-  `amountBet` INT NOT NULL,
+  `amountBet` INT NOT NULL DEFAULT 2,
   `amountPaid` INT NOT NULL DEFAULT 0,
   `paidStatus` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`userID`),
-  FOREIGN KEY (`userID`) REFERENCES users(`userID`),
+  FOREIGN KEY (`userID`) REFERENCES users(`userID`) ON DELETE CASCADE,
   FOREIGN KEY (`bLbID`) REFERENCES bLb(`bLbID`),
   FOREIGN KEY (`bOzID`) REFERENCES bOz(`bOzID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -153,44 +153,44 @@ CREATE TABLE `user_bWeight` (
 CREATE TABLE `user_bLength` (
   `userID` INT NOT NULL,
   `bLengthID` INT NOT NULL,
-  `amountBet` INT NOT NULL,
+  `amountBet` INT NOT NULL DEFAULT 2,
   `amountPaid` INT NOT NULL DEFAULT 0,
   `paidStatus` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`userID`),
-  FOREIGN KEY (`userID`) REFERENCES users(`userID`),
+  FOREIGN KEY (`userID`) REFERENCES users(`userID`) ON DELETE CASCADE,
   FOREIGN KEY (`bLengthID`) REFERENCES bLength(`bLengthID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `user_bHair` (
   `userID` INT NOT NULL,
   `bHairID` INT NOT NULL,
-  `amountBet` INT NOT NULL,
+  `amountBet` INT NOT NULL DEFAULT 0,
   `amountPaid` INT NOT NULL DEFAULT 0,
   `paidStatus` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`userID`),
-  FOREIGN KEY (`userID`) REFERENCES users(`userID`),
+  FOREIGN KEY (`userID`) REFERENCES users(`userID`) ON DELETE CASCADE,
   FOREIGN KEY (`bHairID`) REFERENCES bHair(`bHairID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `user_bFName` (
   `userID` INT NOT NULL,
   `bFNameID` INT NOT NULL,
-  `amountBet` INT NOT NULL,
+  `amountBet` INT NOT NULL DEFAULT 2,
   `amountPaid` INT NOT NULL DEFAULT 0,
   `paidStatus` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`userID`),
-  FOREIGN KEY (`userID`) REFERENCES users(`userID`),
+  FOREIGN KEY (`userID`) REFERENCES users(`userID`) ON DELETE CASCADE,
   FOREIGN KEY (`bFNameID`) REFERENCES bFName(`bFNameID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `user_bMName` (
   `userID` INT NOT NULL,
   `bMNameID` INT NOT NULL,
-  `amountBet` INT NOT NULL,
+  `amountBet` INT NOT NULL DEFAULT 2,
   `amountPaid` INT NOT NULL DEFAULT 0,
   `paidStatus` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`userID`),
-  FOREIGN KEY (`userID`) REFERENCES users(`userID`),
+  FOREIGN KEY (`userID`) REFERENCES users(`userID`) ON DELETE CASCADE,
   FOREIGN KEY (`bMNameID`) REFERENCES bMName(`bMNameID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

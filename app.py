@@ -191,5 +191,23 @@ def betsPlaced():
     return render_template('betsPlaced.html', user=user, bDate=bDate, bTime=bTime, bWeight=bWeight, bLength=bLength, bHair=bHair, bFName=bFName, bMName=bMName)
 
 
+@app.route('/viewMyBets', methods=["POST","GET"])
+def viewMyBets():
+    if request.method == "GET":
+        return render_template('viewMyBets.html')
+
+    if 'myEmail' in request.form:
+        email = request.form['myEmail']
+        bDate
+        bTime
+        bWeight
+        bLength
+        bHair
+        bFName
+        bMName
+
+    else:
+        return render_template('viewMyBets.html')
+
 
 if __name__ == '__main__': app.run(debug=True)
