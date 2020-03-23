@@ -4,7 +4,7 @@ import os
 # get environment variables from heroku to connect to the database
 db_url = os.environ['CLEARDB_DATABASE_URL']
 
-db_url.replace('/',' ').replace(':',' ').replace('@',' ').replace('?',' ').split()
+db_url = db_url.replace('/',' ').replace(':',' ').replace('@',' ').replace('?',' ').split()
 user = db_url[1]
 passwd = db_url[2]
 host = db_url[3]
