@@ -14,6 +14,7 @@ def connect_to_database(host = host, user = user, passwd = passwd, db = db):
     '''
     connects to a database and returns a database objects
     '''
+    print("user: {0}, passwd: {1}, host: {2}, host: {3}, db: {4}".format(user, passwd, host, db))
     db_connection = mariadb.connect(host,user,passwd,db)
     return db_connection
 
