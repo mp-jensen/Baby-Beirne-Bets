@@ -3,6 +3,7 @@ from boto.s3.connection import S3Connection
 
 # get environment variables from heroku to connect to the database
 
+# s3 = boto3.client('s3')
 s3 = S3Connection(os.environ['S3_KEY'], os.environ['S3_SECRET'])
 db_url = s3['CLEARDB_DATABASE_URL']
 
