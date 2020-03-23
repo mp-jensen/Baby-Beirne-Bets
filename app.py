@@ -114,7 +114,7 @@ def placeBets():
         # return with the template and all information needed to populate the form
         # true/false values on whether or not the user has a bet yet and
         # option values for bets
-        return render_template('placeBets.html', userID=userID, email=email, newEmail=newEmail, user_bDate=user_bDate, user_bTime=user_bTime, user_bWeight=user_bWeight, user_bLength=user_bLength, user_bHair=user_bHair, user_bFName=user_bFName, user_bMName=userbMName, date=date, hour=hour, minute=minute, lb=lb, oz=oz, inches=inches, hair=hair, FNletter=FNletter, MNletter=MNletter)
+        return render_template('placeBets.html', userID=userID, email=email, newEmail=newEmail, user_bDate=user_bDate, user_bTime=user_bTime, user_bWeight=user_bWeight, user_bLength=user_bLength, user_bHair=user_bHair, user_bFName=user_bFName, user_bMName=user_bMName, date=date, hour=hour, minute=minute, lb=lb, oz=oz, inches=inches, hair=hair, FNletter=FNletter, MNletter=MNletter)
 
     else:
         return render_template('placeBets.html')
