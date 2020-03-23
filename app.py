@@ -39,11 +39,13 @@ def placeBets():
     FNletter = (None,)
     MNletter = (None,)
 
+    print("Content length: {0}".format(request.content_length))
+    print("Data: {0}".format(request.data))
     print("Request.form contains the following: {0}".format(request.form))
-    if 'email' in request.form:
+    if 'newEmail' in request.form:
         dbConnection = connect_to_database()
         query = 'SELECT userID FROM users WHERE email=%s;'
-        testEmail = (request.form['email'],)
+        testEmail = (request.form['newEmail'],)
         user = execute_query(dbConnection, query, testEmail)
         # check if the email is already registered to a user, if not, prompt for user info along with
         # prompting for all bets
