@@ -170,7 +170,7 @@ def betsPlaced():
     if 'birthLength' in request.form:
         bLengthData = (userID, request.form['birthLength'])
         query = "INSERT INTO user_bLength (userID, bLengthID, amountBet) VALUES (%s,%s,0);"
-        execute_query(dbConnection, query, bTimeData)
+        execute_query(dbConnection, query, bLengthData)
         bLength = True
     if 'birthHair' in request.form:
         bHairData = (userID, request.form['birthHair'])

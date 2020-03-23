@@ -60,10 +60,10 @@
                 <p class="h4 mb-4 text-center">Place Bets</p>
                 <div class="form-group">
                     {% if email %}
-                        <input type="text" value={{ email }} name="submitEmail" id="submitEmail" hidden>
-                        <input type="userID" value={{ userID }} name="userID" id="userID" hidden>
+                        <input type="text" value={{ email[0] }} name="submitEmail" id="submitEmail" hidden>
+                        <input type="userID" value={{ userID[0] }} name="userID" id="userID" hidden>
                     {% else %}
-                        <input type="text" value={{ newEmail }} name="submitEmail" id="submitEmail" hidden>
+                        <input type="text" value={{ newEmail[0] }} name="submitEmail" id="submitEmail" hidden>
                         <div class="border border-light p-5">
                             <p class="h5 mb-4 text-center">Enter User's Information</p>
                             <label for="firstName" class="active">First Name</label>
