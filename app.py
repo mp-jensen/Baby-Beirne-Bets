@@ -12,7 +12,7 @@ def welcome():
     return render_template('welcome.html')
 
 
-@app.route('/placeBets')
+@app.route('/placeBets', methods=["POST","GET"])
 def placeBets():
     print("I am in the placeBets route")
     if request.method == "GET":
