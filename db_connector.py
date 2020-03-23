@@ -1,12 +1,13 @@
 import MySQLdb as mariadb
-from boto.s3.connection import S3Connection
+# from boto.s3.connection import S3Connection
 import os
 
 # get environment variables from heroku to connect to the database
 
-# s3 = boto3.client('s3')
-s3 = S3Connection(os.environ['S3_KEY'], os.environ['S3_SECRET'])
-db_url = s3['CLEARDB_DATABASE_URL']
+# s3 = S3Connection(os.environ['S3_KEY'], os.environ['S3_SECRET'])
+# db_url = s3['CLEARDB_DATABASE_URL']
+
+db_url = os.environ['CLEARDB_DATABASE_URL']
 
 db_url.replace('/',' ').replace(':',' ').replace('@',' ').replace('?',' ').split()
 user = db_url[1]
