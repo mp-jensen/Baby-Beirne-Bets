@@ -197,14 +197,104 @@ def viewMyBets():
         return render_template('viewMyBets.html')
 
     if 'myEmail' in request.form:
+        dbConnection = connect_to_database()
+
+        userID = False
+        bDate = False
+        bHour = False
+        bMinute = False
+        bLb = False
+        bOz = False
+        bLength = False
+        bHair = False
+        bFName = False
+        bMName = False
+
         email = request.form['myEmail']
-        bDate
-        bTime
-        bWeight
-        bLength
-        bHair
-        bFName
-        bMName
+
+        # get userID, if the email is not associated with a user, return the template
+        query = "SELECT userID FROM users WHERE email=%s"
+        userID = execute_query(dbConnection, query, (email,))
+        if userID.rowcount > 0:
+            userID = userID.fetchone[0]
+        else:
+            userID = False
+            return render_template('viewMyBets.html', email=email,userID=userID)
+
+        # get the user's birth date bet
+        query = "SELECT bd.date FROM bDate bd INNER JOIN user_bDate ubd ON bd.bDateID=ubd.bDateID WHERE ubd.userID=%s;"
+        bDate = execute_query(dbConnection, query, (userID,))
+        if bDate.rowcount > 0:
+            bDate = bDate.fetchone[0]
+        else:
+            bDate = False
+
+        # get the user's hour from the birth time bet
+        query = "SELECT bh.hour FROM bHour bh INNER JOIN user_bTime ubt ON bh.bHourID=ubt.bHourID WHERE ubt.userID=%s;"
+        bHour = execute_query(dbConnection, query, (userID,))
+        if bHour.rowcount > 0:
+            bHour = bHour.fetchone[0]
+        else:
+            bHour = False
+
+        # get the user's minute from the birth time bet
+        query = "SELECT bm.minute FROM bMinute bm INNER JOIN user_bTime ubt ON bm.bMinuteID=ubt.bMinuteID WHERE ubt.userID=%s;"
+        bMinute = execute_query(dbConnection, query, (userID,))
+        if bMinute.rowcount > 0:
+            bMinute = bMinute.fetchone[0]
+        else:
+            bMinute = False
+
+        # get the user's lbs from the birth weight bet
+        query = "SELECT bl.lb FROM bLb bl INNER JOIN user_bWeight ubw ON bl.bLbID=ubw.bLbID WHERE ubw.userID=%s;"
+        bLb = execute_query(dbConnection, query, (userID,))
+        if bLb.rowcount > 0:
+            bLb = bLb.fetchone[0]
+        else:
+            bLb = False
+
+        # get user's oz from the birth weight bet
+        query = "SELECT bo.oz FROM bOz bo INNER JOIN user_bWeight ubw ON bo.bOzID=ubw.bOzID WHERE ubw.userID=%s;"
+        bOz = execute_query(dbConnection, query, (userID,))
+        if bOz.rowcount > 0:
+            bOz = bOz.fetchone[0]
+        else:
+            bOz = False
+
+        # get user's inches from birth length bet
+        query = "SELECT bl.inches FROM bLength bl INNER JOIN user_bLength ubl ON bl.bLengthID=ubl.bLengthID WHERE ubl.userID=%s;"
+        bLength = execute_query(dbConnection, query, (userID,))
+        if bLength.rowcount > 0:
+            bLength = bLength.fetchone[0]
+        else:
+            bLength = False
+
+        # get user's hair from birth hair bet
+        query = "SELECT bh.hair FROM bHair bh INNER JOIN user_bHair ubh ON bh.bHairID=ubh.bHairID WHERE ubh.userID=%s"
+        bHair = execute_query(dbConnection, query, (userID,))
+        if bHair.rowcount > 0:
+            bHair = bHair.fetchone[0]
+        else:
+            bHair = False
+
+        # get user's letter from first initial bet
+        query = "SELECT bf.letter FROM bFName bf INNER JOIN user_bFName ubf ON bf.bFNameID=ubf.bFNameID WHERE ubf.userID=%s"
+        bFName = execute_query(dbConnection, query, (userID,))
+        if bFName.rowcount > 0:
+            bFName = bFName.fetchone[0]
+        else:
+            bFName = False
+
+        # get user's letter for middle initial bet
+        query = "SELECT bm.letter FROM bMName bm INNER JOIN user_bMName ubm ON bm.bMNameID=ubm.bMNameID WHERE ubm.userID=%s"
+        bMName = execute_query(dbConnection, query, (userID,))
+        if bMName.rowcount > 0:
+            bMName = bMName.fetchone[0]
+        else:
+            bMName = False
+
+        # render template with all information about user's bets
+        return render_template("viewMyBets.html",email=email, userID=userID, bDate=bDate, bHour=bHour, bMinute=bMinute, bLb=bLb, bOz=bOz, bLength=bLength, bHair=bHair, bFName=bFName, bMName=bMName)
 
     else:
         return render_template('viewMyBets.html')
