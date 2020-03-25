@@ -301,4 +301,14 @@ def viewMyBets():
         return render_template('viewMyBets.html')
 
 
+@app.route('/viewAllBets')
+def viewAllBets():
+    return render_template('viewAllBets.html')
+
+
+@app.route('/winners')
+def winners():
+    return render_template('winners.html')
+
+
 if __name__ == '__main__': app.run(debug=True)
