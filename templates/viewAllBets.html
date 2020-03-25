@@ -96,7 +96,7 @@
             allDateBets.push('{{ value[1] }}');
         {% endfor %}
         var allbDateChar = new Chart(allBDateEle, {
-            type: 'bar',
+            type: 'horizontalBar',
             data: {
                 labels: allDateBets,
                 datasets: [{
@@ -109,6 +109,7 @@
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
+                            precision: 1
                         }
                     }]
                 }
