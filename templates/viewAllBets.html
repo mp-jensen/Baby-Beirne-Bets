@@ -13,8 +13,8 @@
             <div class="card-body">
                 <h5 class="card-title">All Birth Date Bets</h5>
                 <ul class="card-text">
-                    <li>Total Bets: </li>
-                    <li>Total Paid Bets: </li>
+                    <li>Total Bets: {% if bDateData[0] %}{{ bDateData[0][0] }}{% else %}0{% endif %}</li>
+                    <li>Total Paid Bets: {% if bDateData[1] %}{{ bDateData[1][0] }}{% else %}0{% endif %}</li>
                 </ul>
             </div>
         </div>
@@ -85,5 +85,36 @@
             </div>
         </div>
     </div>
+
+    <script>
+        {% if bDateData[3] %}
+        var allBDateEle = document.getElementById('allDateBets');
+        var allDateBets = [];
+        var allDateCounts = [];
+        {% for value in bDateData[3] %}
+            allDateCounts.push({{ value[0] }});
+            allDateBets.push({{ value[1] }});
+        {% endfor %}
+        var allbDateChar = new Chart(allBDateChar, {
+            type: 'bar',
+            data: {
+                labels: allDateBets,
+                datasets: [{
+                    label: '# of Bets',
+                    data: allDateCounts
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+        {% endif %}
+    </script>
 
 {% endblock %}

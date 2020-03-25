@@ -303,7 +303,18 @@ def viewMyBets():
 
 @app.route('/viewAllBets')
 def viewAllBets():
-    return render_template('viewAllBets.html')
+    dbConnection = connect_to_database()
+
+    bDateCount = execute_query(dbConnection, "SELECT count(*) FROM user_bDate;")
+    bDatePaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bDate WHERE paidStatus > 0;")
+    bDateValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bDate WHERE paidStatus > 0;")
+    allBDateBets = execute_query(dbConnection, "SELECT count(*),bd.date FROM user_bDate ubd INNER JOIN bDate bd ON ubd.bDateID=bd.bDateID GROUP BY bd.bDateID;")
+    paidBDateBets = execute_query(dbConnection, "SELECT count(*),bd.date FROM user_bDate ubd INNER JOIN bDate bd ON ubd.bDateID=bd.bDateID WHERE ubd.paidStatus>0 GROUP BY bd.bDateID;")
+    bDateData = (bDateCount, bDatePaidCount, bDateValue, allBDateBets, paidBDateBets)
+    for item in bDateData:
+        if item.rowcount() < 1:
+            item = False
+    return render_template('viewAllBets.html', bDateData=bDateData)
 
 
 @app.route('/winners')
