@@ -100,16 +100,19 @@
             data: {
                 labels: allDateBets,
                 datasets: [{
-                    label: '# of Bets',
                     data: allDateCounts
                 }]
             },
             options: {
                 scales: {
                     yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "# of Bets"
+                        },
                         ticks: {
                             beginAtZero: true,
-                            precision: 1
+                            stepSize: 1
                         }
                     }]
                 }
