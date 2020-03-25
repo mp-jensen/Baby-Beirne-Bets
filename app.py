@@ -313,7 +313,7 @@ def viewAllBets():
     bDateData = (bDateCount, bDatePaidCount, bDateValue, allBDateBets, paidBDateBets)
     for item in bDateData:
         if item.rowcount < 1:
-            item = False
+            item = item.fetchall()
     return render_template('viewAllBets.html', bDateData=bDateData)
 
 
