@@ -312,7 +312,7 @@ def viewAllBets():
     paidBDateBets = execute_query(dbConnection, "SELECT count(*),bd.date FROM user_bDate ubd INNER JOIN bDate bd ON ubd.bDateID=bd.bDateID WHERE ubd.paidStatus>0 GROUP BY bd.bDateID;")
     bDateData = (bDateCount, bDatePaidCount, bDateValue, allBDateBets, paidBDateBets)
     for item in bDateData:
-        if item.rowcount() < 1:
+        if item.rowcount < 1:
             item = False
     return render_template('viewAllBets.html', bDateData=bDateData)
 
