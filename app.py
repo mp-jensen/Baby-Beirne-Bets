@@ -306,16 +306,16 @@ def viewAllBets():
     dbConnection = connect_to_database()
 
     bDateCount = execute_query(dbConnection, "SELECT count(*) FROM user_bDate;")
+    bDateCount = False if bDateCount.rowcount < 1 else bDateCount.fetchall()
     bDatePaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bDate WHERE paidStatus > 0;")
+    bDatePaidCount = False if bDatePaidCount.rowcount < 1 else bDatePaidCount.fetchall()
     bDateValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bDate WHERE paidStatus > 0;")
+    bDateValue = False if bDateValue.rowcount < 1 else bDateValue.fetchall()
     allBDateBets = execute_query(dbConnection, "SELECT count(*),bd.date FROM user_bDate ubd INNER JOIN bDate bd ON ubd.bDateID=bd.bDateID GROUP BY bd.bDateID;")
+    allBDateBets = False if allBDateBets.rowcount < 1 else allBDateBets.fetchall()
     paidBDateBets = execute_query(dbConnection, "SELECT count(*),bd.date FROM user_bDate ubd INNER JOIN bDate bd ON ubd.bDateID=bd.bDateID WHERE ubd.paidStatus>0 GROUP BY bd.bDateID;")
+    paidBDateBets = False if paidBDateBets.rowcount < 1 else paidBDateBets.fetchall()
     bDateData = (bDateCount, bDatePaidCount, bDateValue, allBDateBets, paidBDateBets)
-    for item in bDateData:
-        if item.rowcount < 1:
-            item = False
-        else:
-            item = item.fetchall()
     return render_template('viewAllBets.html', bDateData=bDateData)
 
 
