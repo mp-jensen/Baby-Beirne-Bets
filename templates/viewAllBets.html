@@ -13,8 +13,8 @@
             <div class="card-body">
                 <h5 class="card-title">All Birth Date Bets</h5>
                 <ul class="card-text">
-                    <li>Total Bets: {% if bDateData[0] %}{{ bDateData[0] }}{% else %}0{% endif %}</li>
-                    <li>Total Paid Bets: {% if bDateData[1] %}{{ bDateData[1] }}{% else %}0{% endif %}</li>
+                    <li>Total Bets: {% if bDateData[0] %}{{ bDateData[0][0] }}{% else %}0{% endif %}</li>
+                    <li>Total Paid Bets: {% if bDateData[1] %}{{ bDateData[1][0]}}{% else %}0{% endif %}</li>
                 </ul>
             </div>
         </div>
