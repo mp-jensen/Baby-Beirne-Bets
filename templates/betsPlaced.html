@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Bets Placed{% endblock %}
+
+{% block content %}
+
+    {% if get %}
+        <div class="container">
+            <p>In order to place bets, please go to the <a href="/placeBets">Place Bets</a> page.</p>
+        </div>
+    {% else %}
+        <div class="container">
+            <div class="page-header">
+              <h1>Bets Placed!</h1>
+            </div>
+
+            <div class="container">
+                {% if user %}
+                    <p>
+                        Congratulations! You have used a new email to place bets. You have placed bets in the following categories:
+                    </p>
+                {% else %}
+                    <p>
+                        Congratulations! You have used an existing email to place additional bets in the following categories:
+                    </p>
+                {% endif %}
+                <ul>
+                    {% if bDate %}
+                        <li>Baby's birth date</li>
+                    {% endif %}
+                    {% if bTime %}
+                        <li>Baby's birth time</li>
+                    {% endif %}
+                    {% if bWeight %}
+                        <li>Baby's birth weight</li>
+                    {% endif %}
+                    {% if bLength %}
+                        <li>Baby's birth length</li>
+                    {% endif %}
+                    {% if bHair %}
+                        <li>Baby's hair at birth</li>
+                    {% endif %}
+                    {% if bFName %}
+                        <li>Baby's first name initial</li>
+                    {% endif %}
+                    {% if bMName %}
+                        <li>Baby's middle name initial</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

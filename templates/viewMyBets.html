@@ -4,4 +4,87 @@
 
 {% block content %}
 
+    {% if email %}
+        {% if not userID %}
+            <div class="container">
+                <div class="alert alert-danger" role="alert">
+                    <strong>E-mail is not registered!</strong> This email has not been registered to a user yet, please visit <a href="/placeBets" class="alert-link">Place Bets</a> to place bets using this email
+                </div>
+
+                <div class="page-header">
+                    <h1>Enter Email to View Bets</h1>
+                </div>
+
+                <form action="/viewMyBets" method="POST">
+                    <div class="form-group">
+                        <label for="myEmail">Email address:</label>
+                        <input type="text" name="myEmail" class="form-control" id="myEmail" placeholder="E-mail Bets Placed Under">
+                    </div>
+                    <button type="submit" class="btn btn-default" value="submitEmail">Submit</button>
+                </form>
+                <br>
+            </div>
+        {% else %}
+            <div class="container">
+                <div class="page-header">
+                    <h1>Bets Entered For {{ email }}</h1>
+                </div>
+                <div class="container">
+                    <ul>
+                        {% if bDate %}
+                            <li><strong>Baby's birth date:</strong> {{ bDate }}</li>
+                        {% else %}
+                            <li><strong>Baby's birth date:</strong> No Bet Placed</li>
+                        {% endif %}
+                        {% if bHour %}
+                            <li><strong>Baby's birth time:</strong> Hour: {{ bHour }} Minute: {{ bMinute[0] }}</li>
+                        {% else %}
+                            <li><strong>Baby's birth time:</strong> No Bet Placed</li>
+                        {% endif %}
+                        {% if bLb %}
+                            <li><strong>Baby's birth weight:</strong> {{ bLb }} Lb {{ bOz }} oz</li>
+                        {% else %}
+                            <li><strong>Baby's birth weight:</strong> No Bet Placed</li>
+                        {% endif %}
+                        {% if bLength %}
+                            <li><strong>Baby's birth length:</strong> {{ bLength }} inches</li>
+                         {% else %}
+                            <li><strong>Baby's birth length:</strong> No Bet Placed</li>
+                        {% endif %}
+                        {% if bHair %}
+                            <li><strong>Baby's hair at birth:</strong> {{ bHair }}</li>
+                         {% else %}
+                            <li><strong>Baby's hair at birth:</strong> No Bet Placed</li>
+                        {% endif %}
+                        {% if bFName %}
+                            <li><strong>Baby's first name initial:</strong> {{ bFName }}</li>
+                         {% else %}
+                            <li><strong>Baby's first name initial:</strong> No Bet Placed</li>
+                        {% endif %}
+                        {% if bMName %}
+                            <li><strong>Baby's middle name initial:</strong> {{ bMName }}</li>
+                         {% else %}
+                            <li><strong>Baby's middle name initial:</strong> No Bet Placed</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="container">
+            <div class="page-header">
+                <h1>Enter Email to View Bets</h1>
+            </div>
+
+            <form action="/viewMyBets" method="POST">
+                <div class="form-group">
+                    <label for="myEmail">Email address:</label>
+                    <input type="text" name="myEmail" class="form-control" id="myEmail" placeholder="E-mail Bets Placed Under">
+                </div>
+                <button type="submit" class="btn btn-default" value="submitEmail">Submit</button>
+            </form>
+            <br>
+        </div>
+    {% endif %}
+
 {% endblock %}
