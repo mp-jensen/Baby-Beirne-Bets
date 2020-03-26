@@ -8,8 +8,40 @@
             <h1>Current Bets, Paid and Unpaid</h1>
         </div>
 
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Birth Date Bets</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Paid Bets</h3>
+                            </div>
+                            <canvas id="paidDateBets"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Bets</h3>
+                            </div>
+                            <canvas id="allDateBets"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <ul class="card-text">
+                        <li>Total Bets: {% if bDateData[0] %}{{ bDateData[0] }}{% else %}0{% endif %}</li>
+                        <li>Total Paid Bets: {% if bDateData[1] %}{{ bDateData[1]}}{% else %}0{% endif %}</li>
+                        <li>Total Pot Value: ${% if bDateData[2] %}{{ bDateData[2] }}{% else %}0{% endif %}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="card" style="width: 288px;">
-            <canvas class="card-img-top" id="allDateBets" width="288" height="180"></canvas>
+            <canvas class="card-img-top" id="DateBets" width="288" height="180"></canvas>
             <div class="card-body">
                 <h5 class="card-title">All Birth Date Bets</h5>
                 <ul class="card-text">
