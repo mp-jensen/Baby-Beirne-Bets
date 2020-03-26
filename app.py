@@ -329,7 +329,42 @@ def viewAllBets():
     paidBTimeBets = False if paidBTimeBets.rowcount < 1 else paidBTimeBets.fetchall()
     bTimeData = (bTimeCount, bTimePaidCount, bTimeValue, allBTimeBets, paidBTimeBets)
 
-    return render_template('viewAllBets.html', bDateData=bDateData,bTimeData=bTimeData)
+    bWeightCount = False
+    bWeightPaidCount = False
+    bWeightValue = False
+    allBWeightBets = False
+    paidBWeightBets = False
+    bWeightData = (bWeightCount, bWeightPaidCount, bWeightValue, allBWeightBets, paidBWeightBets)
+
+    bLengthCount = False
+    bLengthPaidCount = False
+    bLengthValue = False
+    allBLengthBets = False
+    paidBLengthBets = False
+    bLengthData = (bLengthCount, bLengthPaidCount, bLengthValue, allBLengthBets, paidBLengthBets)
+
+    bHairCount = False
+    bHairPaidCount = False
+    bHairValue = False
+    allBHairBets = False
+    paidBHairBets = False
+    bHairData = (bHairCount, bHairPaidCount, bHairValue, allBHairBets, paidBHairBets)
+
+    bFNameCount = False
+    bFNamePaidCount = False
+    bFNameValue = False
+    allBFNameBets = False
+    paidBFNameBets = False
+    bFNameData = (bFNameCount, bFNamePaidCount, bFNameValue, allBFNameBets, paidBFNameBets)
+
+    bMNameCount = False
+    bMNamePaidCount = False
+    bMNameValue = False
+    allBMNameBets = False
+    paidBMNameBets = False
+    bMNameData = (bMNameCount, bMNamePaidCount, bMNameValue, allBMNameBets, paidBMNameBets)
+
+    return render_template('viewAllBets.html', bDateData=bDateData,bTimeData=bTimeData,bLengthData=bLengthData,bHairData=bHairData,bFNameData=bFNameData,bMNameData=bMNameData)
 
 
 @app.route('/winners')
