@@ -10,6 +10,9 @@ def welcome():
     print(request)
     return render_template('welcome.html')
 
+@app.route('/danAndAsha')
+def danAndAsha():
+    return render_template('danAndAsha.html')
 
 @app.route('/placeBets', methods=["POST","GET"])
 def placeBets():
