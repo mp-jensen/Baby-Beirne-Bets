@@ -87,20 +87,48 @@
     </div>
 
     <script>
+
+    var allBackgroundColor = [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+    ];
+    var allBorderColor = [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+    ];
+    var colorTypes = 6
+
         {% if bDateData[3] %}
         var allBDateEle = document.getElementById('allDateBets');
         var allDateBets = [];
         var allDateCounts = [];
+        var bdBackgroundColor = [];
+        var bdBorderColor = [];
+        var bdColorCount = 0;
         {% for value in bDateData[3] %}
             allDateCounts.push({{ value[0] }});
             allDateBets.push('{{ value[1] }}');
+            bdBackgroundColor.push(allBackgroundColor[bdColorCount]);
+            bdBorderColor.push(allBorderColor[bdColorCount]);
+            bdColorCount++;
+            if (bdColorCount == colorTypes) { bdColorCount=0; }
         {% endfor %}
         var allbDateChar = new Chart(allBDateEle, {
             type: 'horizontalBar',
             data: {
                 labels: allDateBets,
                 datasets: [{
-                    data: allDateCounts
+                    data: allDateCounts,
+                    backgroundColor: bdBackgroundColor,
+                    borderColor: bdBorderColor
                 }]
             },
             options: {
@@ -118,12 +146,147 @@
                             stepSize: 1,
                             suggestedMax: 3
                         }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Date (yyyy-mm-dd)"
+                        }
                     }]
                 }
             }
         });
         {% endif %}
+
+        {% if bTimeData[3] %}
+        var allBTimeEle = document.getElementById('allTimeBets');
+        var allTimeBets = [];
+        var allTimeCounts = [];
+        {% for value in bTimeData[3] %}
+            allTimeCounts.push({{ value[0] }});
+            allTimeBets.push('{{ value[1] }}h {{ value[2] }}m');
+        {% endfor %}
+        var allbTimeChar = new Chart(allBTimeEle, {
+            type: 'horizontalBar',
+            data: {
+                labels: allTimeBets,
+                datasets: [{
+                    data: allTimeCounts
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "# of Bets"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            suggestedMax: 3
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Time of Day (h,m)"
+                        }
+                    }]
+                }
+            }
+        });
+        {% endif %}
+
+        {% if bWeightData[3] %}
+        var allBWeightEle = document.getElementById('allWeightBets');
+        var allWeightBets = [];
+        var allWeightCounts = [];
+        {% for value in bWeightData[3] %}
+            allWeightCounts.push({{ value[0] }});
+            allWeightBets.push('{{ value[1] }}lb {{ value[2] }}oz');
+        {% endfor %}
+        var allbWeightChar = new Chart(allBWeightEle, {
+            type: 'horizontalBar',
+            data: {
+                labels: allWeightBets,
+                datasets: [{
+                    data: allWeightCounts
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "# of Bets"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            suggestedMax: 3
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Weight (lb,oz)"
+                        }
+                    }]
+                }
+            }
+        });
+        {% endif %}
+
+            {% if bLengthData[3] %}
+        var allBLengthEle = document.getElementById('allLengthBets');
+        var allLengthBets = [];
+        var allLengthCounts = [];
+        {% for value in bLengthData[3] %}
+            allTLengthCounts.push({{ value[0] }});
+            allLengthBets.push('{{ value[1] }}');
+        {% endfor %}
+        var allbLengthChar = new Chart(allBLengthEle, {
+            type: 'horizontalBar',
+            data: {
+                labels: allLengthBets,
+                datasets: [{
+                    data: allLengthCounts
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "# of Bets"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            suggestedMax: 3
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Length (inches)"
+                        }
+                    }]
+                }
+            }
+        });
+        {% endif %}
+
     </script>
-    <script src="{{ url_for('static', filename='js/AllTimeBets.js') }}"></script>
 
 {% endblock %}
