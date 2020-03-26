@@ -17,7 +17,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Paid Bets</h3>
+                                <h3>Paid Birth Date Bets</h3>
                             </div>
                             <canvas id="paidDateBets"></canvas>
                         </div>
@@ -25,7 +25,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Bets</h3>
+                                <h3>All Birth Date Bets</h3>
                             </div>
                             <canvas id="allDateBets"></canvas>
                         </div>
@@ -50,7 +50,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Paid Bets</h3>
+                                <h3>Paid Birth Time Bets</h3>
                             </div>
                             <canvas id="paidTimeBets"></canvas>
                         </div>
@@ -58,7 +58,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Bets</h3>
+                                <h3>All Birth Time Bets</h3>
                             </div>
                             <canvas id="allTimeBets"></canvas>
                         </div>
@@ -83,7 +83,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Paid Bets</h3>
+                                <h3>Paid Birth Weight Bets</h3>
                             </div>
                             <canvas id="paidWeightBets"></canvas>
                         </div>
@@ -91,7 +91,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Bets</h3>
+                                <h3>All Birth Weight Bets</h3>
                             </div>
                             <canvas id="allWeightBets"></canvas>
                         </div>
@@ -116,7 +116,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Paid Bets</h3>
+                                <h3>Paid Birth Length Bets</h3>
                             </div>
                             <canvas id="paidLengthBets"></canvas>
                         </div>
@@ -124,7 +124,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Bets</h3>
+                                <h3>All Birth Length Bets</h3>
                             </div>
                             <canvas id="allLengthBets"></canvas>
                         </div>
@@ -149,7 +149,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Paid Bets</h3>
+                                <h3>Paid Hair Color Bets</h3>
                             </div>
                             <canvas id="paidHairBets"></canvas>
                         </div>
@@ -157,7 +157,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Bets</h3>
+                                <h3>All Hair Color Bets</h3>
                             </div>
                             <canvas id="allHairBets"></canvas>
                         </div>
@@ -182,7 +182,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Paid Bets</h3>
+                                <h3>Paid First Initial Bets</h3>
                             </div>
                             <canvas id="paidFNameBets"></canvas>
                         </div>
@@ -190,7 +190,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Bets</h3>
+                                <h3>All First Inital Bets</h3>
                             </div>
                             <canvas id="allFNameBets"></canvas>
                         </div>
@@ -215,7 +215,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Paid Bets</h3>
+                                <h3>Paid Middle Initial Bets</h3>
                             </div>
                             <canvas id="paidMNameBets"></canvas>
                         </div>
@@ -223,7 +223,7 @@
                     <div class="col-sm-6">
                         <div class="thumbnail">
                             <div class="caption">
-                                <h3>All Bets</h3>
+                                <h3>All Middle Initial Bets</h3>
                             </div>
                             <canvas id="allMNameBets"></canvas>
                         </div>
@@ -312,6 +312,58 @@
         });
         {% endif %}
 
+        {% if bDateData[4] %}
+        var paidBDateEle = document.getElementById('paidDateBets');
+        var paidDateBets = [];
+        var paidDateCounts = [];
+        var pbdBackgroundColor = [];
+        var pbdBorderColor = [];
+        var pbdColorCount = 0;
+        {% for value in bDateData[4] %}
+            paidDateCounts.push({{ value[0] }});
+            paidDateBets.push('{{ value[1] }}');
+            pbdBackgroundColor.push(allBackgroundColor[pbdColorCount]);
+            pbdBorderColor.push(allBorderColor[pbdColorCount]);
+            pbdColorCount++;
+            if (pbdColorCount == colorTypes) { pbdColorCount=0; }
+        {% endfor %}
+        var paidbDateChar = new Chart(paidBDateEle, {
+            type: 'horizontalBar',
+            data: {
+                labels: paidDateBets,
+                datasets: [{
+                    data: paidDateCounts,
+                    backgroundColor: pbdBackgroundColor,
+                    borderColor: pbdBorderColor
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "# of Bets"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            suggestedMax: 3
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Date (yyyy-mm-dd)"
+                        }
+                    }]
+                }
+            }
+        });
+        {% endif %}
+
         {% if bTimeData[3] %}
         var allBTimeEle = document.getElementById('allTimeBets');
         var allTimeBets = [];
@@ -363,6 +415,59 @@
             }
         });
         {% endif %}
+
+        {% if bTimeData[4] %}
+        var paidBTimeEle = document.getElementById('paidTimeBets');
+        var paidTimeBets = [];
+        var paidTimeCounts = [];
+        var pbtBackgroundColor = [];
+        var pbtBorderColor = [];
+        var pbtColorCount = 0;
+        {% for value in bTimeData[4] %}
+            paidTimeCounts.push({{ value[0] }});
+            paidTimeBets.push('{{ value[1] }}h {{ value[2] }}m');
+            pbtBackgroundColor.push(allBackgroundColor[pbtColorCount]);
+            pbtBorderColor.push(allBorderColor[pbtColorCount]);
+            pbtColorCount++;
+            if (pbtColorCount == colorTypes) { pbtColorCount=0; }
+        {% endfor %}
+        var paidbTimeChar = new Chart(paidBTimeEle, {
+            type: 'horizontalBar',
+            data: {
+                labels: paidTimeBets,
+                datasets: [{
+                    data: paidTimeCounts,
+                    backgroundColor: pbtBackgroundColor,
+                    borderColor: pbtBorderColor
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "# of Bets"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            suggestedMax: 3
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Time of Day (h,m)"
+                        }
+                    }]
+                }
+            }
+        });
+        {% endif %}
+
 
         {% if bWeightData[3] %}
         var allBWeightEle = document.getElementById('allWeightBets');
@@ -416,6 +521,59 @@
         });
         {% endif %}
 
+        {% if bWeightData[4] %}
+        var paidBWeightEle = document.getElementById('paidWeightBets');
+        var paidWeightBets = [];
+        var paidWeightCounts = [];
+        var pbwBackgroundColor = [];
+        var pbwBorderColor = [];
+        var pbwColorCount = 0;
+        {% for value in bWeightData[4] %}
+            paidWeightCounts.push({{ value[0] }});
+            paidWeightBets.push('{{ value[1] }}lb {{ value[2] }}oz');
+            pbwBackgroundColor.push(allBackgroundColor[pbwColorCount]);
+            pbwBorderColor.push(allBorderColor[pbwColorCount]);
+            pbwColorCount++;
+            if (pbwColorCount == colorTypes) { pbwColorCount=0; }
+        {% endfor %}
+        var paidbWeightChar = new Chart(paidBWeightEle, {
+            type: 'horizontalBar',
+            data: {
+                labels: paidWeightBets,
+                datasets: [{
+                    data: paidWeightCounts,
+                    backgroundColor: pbwBackgroundColor,
+                    borderColor: pbwBorderColor
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "# of Bets"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            suggestedMax: 3
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Weight (lb,oz)"
+                        }
+                    }]
+                }
+            }
+        });
+        {% endif %}
+
+
         {% if bLengthData[3] %}
         var allBLengthEle = document.getElementById('allLengthBets');
         var allLengthBets = [];
@@ -468,6 +626,58 @@
         });
         {% endif %}
 
+        {% if bLengthData[4] %}
+        var paidBLengthEle = document.getElementById('paidLengthBets');
+        var paidLengthBets = [];
+        var paidLengthCounts = [];
+        var pblBackgroundColor = [];
+        var pblBorderColor = [];
+        var pblColorCount = 0;
+        {% for value in bLengthData[4] %}
+            paidLengthCounts.push({{ value[0] }});
+            paidLengthBets.push('{{ value[1] }}');
+            pblBackgroundColor.push(allBackgroundColor[pblColorCount]);
+            pblBorderColor.push(allBorderColor[pblColorCount]);
+            pblColorCount++;
+            if (pblColorCount == colorTypes) { pblColorCount=0; }
+        {% endfor %}
+        var paidbLengthChar = new Chart(paidBLengthEle, {
+            type: 'horizontalBar',
+            data: {
+                labels: paidLengthBets,
+                datasets: [{
+                    data: paidLengthCounts,
+                    backgroundColor: pblBackgroundColor,
+                    borderColor: pblBorderColor
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "# of Bets"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            suggestedMax: 3
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Length (inches)"
+                        }
+                    }]
+                }
+            }
+        });
+        {% endif %}
+
         {% if bHairData[3] %}
         var allBHairEle = document.getElementById('allHairBets');
         var allHairBets = [];
@@ -491,6 +701,58 @@
                     data: allHairCounts,
                     backgroundColor: bhBackgroundColor,
                     borderColor: bhBorderColor
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "# of Bets"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            suggestedMax: 3
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Hair Color"
+                        }
+                    }]
+                }
+            }
+        });
+        {% endif %}
+
+        {% if bHairData[4] %}
+        var paidBHairEle = document.getElementById('paidHairBets');
+        var paidHairBets = [];
+        var paidHairCounts = [];
+        var pbhBackgroundColor = [];
+        var pbhBorderColor = [];
+        var pbhColorCount = 0;
+        {% for value in bHairData[4] %}
+            paidHairCounts.push({{ value[0] }});
+            paidHairBets.push('{{ value[1] }}');
+            pbhBackgroundColor.push(paidBackgroundColor[pbhColorCount]);
+            pbhBorderColor.push(paidBorderColor[pbhColorCount]);
+            pbhColorCount++;
+            if (pbhColorCount == colorTypes) { pbhColorCount=0; }
+        {% endfor %}
+        var paidbHairChar = new Chart(paidBHairEle, {
+            type: 'horizontalBar',
+            data: {
+                labels: paidHairBets,
+                datasets: [{
+                    data: paidHairCounts,
+                    backgroundColor: pbhBackgroundColor,
+                    borderColor: pbhBorderColor
                 }]
             },
             options: {
@@ -573,7 +835,60 @@
         });
         {% endif %}
 
-{% if bMNameData[3] %}
+        {% if bFNameData[4] %}
+        var paidBFNameEle = document.getElementById('paidFNameBets');
+        var paidFNameBets = [];
+        var paidFNameCounts = [];
+        var pbfnBackgroundColor = [];
+        var pbfnBorderColor = [];
+        var pbfnColorCount = 0;
+        {% for value in bFNameData[4] %}
+            paidFNameCounts.push({{ value[0] }});
+            paidFNameBets.push('{{ value[1] }}');
+            pbfnBackgroundColor.push(allBackgroundColor[pbfnColorCount]);
+            pbfnBorderColor.push(allBorderColor[pbfnColorCount]);
+            pbfnColorCount++;
+            if (pbfnColorCount == colorTypes) { pbfnColorCount=0; }
+        {% endfor %}
+        var paidbFNameChar = new Chart(paidBFNameEle, {
+            type: 'horizontalBar',
+            data: {
+                labels: paidFNameBets,
+                datasets: [{
+                    data: paidFNameCounts,
+                    backgroundColor: pbfnBackgroundColor,
+                    borderColor: pbfnBorderColor
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "# of Bets"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            suggestedMax: 3
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "First Name Initial"
+                        }
+                    }]
+                }
+            }
+        });
+        {% endif %}
+
+
+    {% if bMNameData[3] %}
         var allBMNameEle = document.getElementById('allMNameBets');
         var allMNameBets = [];
         var allMNameCounts = [];
@@ -624,6 +939,59 @@
             }
         });
         {% endif %}
+
+    {% if bMNameData[4] %}
+        var paidBMNameEle = document.getElementById('paidMNameBets');
+        var paidMNameBets = [];
+        var paidMNameCounts = [];
+        var pbmnBackgroundColor = [];
+        var pbmnBorderColor = [];
+        var pbmnColorCount = 0;
+        {% for value in bMNameData[4] %}
+            paidMNameCounts.push({{ value[0] }});
+            paidMNameBets.push('{{ value[1] }}');
+            pbmnBackgroundColor.push(allBackgroundColor[pbmnColorCount]);
+            pbmnBorderColor.push(allBorderColor[pbmnColorCount]);
+            pbmnColorCount++;
+            if (pbmnColorCount == colorTypes) { pbmnColorCount=0; }
+        {% endfor %}
+        var paidbMNameChar = new Chart(paidBMNameEle, {
+            type: 'horizontalBar',
+            data: {
+                labels: paidMNameBets,
+                datasets: [{
+                    data: paidMNameCounts,
+                    backgroundColor: pbmnBackgroundColor,
+                    borderColor: pbmnBorderColor
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "# of Bets"
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1,
+                            suggestedMax: 3
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Middle Name Initial"
+                        }
+                    }]
+                }
+            }
+        });
+        {% endif %}
+
 
     </script>
 
