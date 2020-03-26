@@ -316,7 +316,20 @@ def viewAllBets():
     paidBDateBets = execute_query(dbConnection, "SELECT count(*),bd.date FROM user_bDate ubd INNER JOIN bDate bd ON ubd.bDateID=bd.bDateID WHERE ubd.paidStatus>0 GROUP BY bd.bDateID;")
     paidBDateBets = False if paidBDateBets.rowcount < 1 else paidBDateBets.fetchall()
     bDateData = (bDateCount, bDatePaidCount, bDateValue, allBDateBets, paidBDateBets)
-    return render_template('viewAllBets.html', bDateData=bDateData)
+
+    bTimeCount = execute_query(dbConnection, "SELECT count(*) FROM user_bTime;")
+    bTimeCount = False if bTimeCount.rowcount < 1 else bTimeCount.fetchall()
+    bTimePaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bWeight WHERE paidStatus > 0;")
+    bTimePaidCount = False if bTimePaidCount.rowcount < 1 else bTimePaidCount.fetchall()
+    bTimeValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bTime WHERE paidStatus > 0;")
+    bTimeValue = False if bTimeValue.rowcount < 1 else bTimeValue.fetchall()
+    allBTimeBets = execute_query(dbConnection, "SELECT count(*),bh.hour,bm.minute FROM user_bTime ubt INNER JOIN bHour bh ON ubt.bHourID=bh.bHourID INNER JOIN bMinute bm ON ubt.bMinuteID=bm.bMinuteID GROUP BY ubt.bHourID, ubt.bMinuteID;")
+    allBTimeBets = False if allBTimeBets.rowcount < 1 else allBTimeBets.fetchall()
+    paidBTimeBets = execute_query(dbConnection, "SELECT count(*),bh.hour,bm.minute FROM user_bTime ubt INNER JOIN bHour bh ON ubt.bHourID=bh.bHourID INNER JOIN bMinute bm ON ubt.bMinuteID=bm.bMinuteID WHERE ubt.paidStatus>0 GROUP BY ubt.bHourID, ubt.bMinuteID;")
+    paidBTimeBets = False if paidBTimeBets.rowcount < 1 else paidBTimeBets.fetchall()
+    bTimeData = (bTimeCount, bTimePaidCount, bTimeValue, allBTimeBets, paidBTimeBets)
+
+    return render_template('viewAllBets.html', bDateData=bDateData,bTimeData=bTimeData)
 
 
 @app.route('/winners')
