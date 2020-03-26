@@ -10,7 +10,7 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Birth Date Bets</h3>
+                <h1 class="panel-title">Birth Date Bets</h1>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -40,83 +40,205 @@
                 </div>
             </div>
         </div>
-        <div class="card" style="width: 288px;">
-            <canvas class="card-img-top" id="DateBets" width="288" height="180"></canvas>
-            <div class="card-body">
-                <h5 class="card-title">All Birth Date Bets</h5>
-                <ul class="card-text">
-                    <li>Total Bets: {% if bDateData[0] %}{{ bDateData[0] }}{% else %}0{% endif %}</li>
-                    <li>Total Paid Bets: {% if bDateData[1] %}{{ bDateData[1]}}{% else %}0{% endif %}</li>
-                </ul>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Birth Time Bets</h1>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Paid Bets</h3>
+                            </div>
+                            <canvas id="paidTimeBets"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Bets</h3>
+                            </div>
+                            <canvas id="allTimeBets"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <ul class="card-text">
+                        <li>Total Bets: {% if bTimeData[0] %}{{ bTimeData[0] }}{% else %}0{% endif %}</li>
+                        <li>Total Paid Bets: {% if bTimeData[1] %}{{ bTimeData[1]}}{% else %}0{% endif %}</li>
+                        <li>Total Pot Value: ${% if bTimeeData[2] %}{{ bTimeData[2] }}{% else %}0{% endif %}</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <div class="card" style="width: 288px;">
-            <canvas class="card-img-top" id="allTimeBets" width="288" height="180"></canvas>
-            <div class="card-body">
-                <h5 class="card-title">All Birth Time Bets</h5>
-                <ul class="card-text">
-                    <li>Total Bets: {% if bTimeData[0] %}{{ bTimeData[0] }}{% else %}0{% endif %}</li>
-                    <li>Total Paid Bets: {% if bTimeData[1] %}{{ bTimeData[1] }}{% else %}0{% endif %}</li>
-                </ul>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Birth Weight Bets</h1>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Paid Bets</h3>
+                            </div>
+                            <canvas id="paidWeightBets"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Bets</h3>
+                            </div>
+                            <canvas id="allWeightBets"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <ul class="card-text">
+                        <li>Total Bets: {% if bWeightData[0] %}{{ bWeightData[0] }}{% else %}0{% endif %}</li>
+                        <li>Total Paid Bets: {% if bWeightData[1] %}{{ bWeightData[1]}}{% else %}0{% endif %}</li>
+                        <li>Total Pot Value: ${% if bWeightData[2] %}{{ bWeightData[2] }}{% else %}0{% endif %}</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-            <div class="card" style="width: 288px;">
-            <canvas class="card-img-top" id="allWeightBets" width="288" height="180"></canvas>
-            <div class="card-body">
-                <h5 class="card-title">All Birth Weight Bets</h5>
-                <ul class="card-text">
-                    <li>Total Bets: {% if bWeightData[0] %}{{ bWeightData[0] }}{% else %}0{% endif %}</li>
-                    <li>Total Paid Bets: {% if bWeightData[1] %}{{ bWeightData[1] }}{% else %}0{% endif %}</li>
-                </ul>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Birth Length Bets</h1>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Paid Bets</h3>
+                            </div>
+                            <canvas id="paidLengthBets"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Bets</h3>
+                            </div>
+                            <canvas id="allLengthBets"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <ul class="card-text">
+                        <li>Total Bets: {% if bLengthData[0] %}{{ bLengthData[0] }}{% else %}0{% endif %}</li>
+                        <li>Total Paid Bets: {% if bLengthData[1] %}{{ bLengthData[1]}}{% else %}0{% endif %}</li>
+                        <li>Total Pot Value: ${% if bLengthData[2] %}{{ bLengthData[2] }}{% else %}0{% endif %}</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-            <div class="card" style="width: 288px;">
-            <canvas class="card-img-top" id="allLengthBets" width="288" height="180"></canvas>
-            <div class="card-body">
-                <h5 class="card-title">All Birth Length Bets</h5>
-                <ul class="card-text">
-                    <li>Total Bets: {% if bLengthData[0] %}{{ bLengthData[0] }}{% else %}0{% endif %}</li>
-                    <li>Total Paid Bets: {% if bLengthData[1] %}{{ bLengthData[1] }}{% else %}0{% endif %}</li>
-                </ul>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Birth Hair Color Bets</h1>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Paid Bets</h3>
+                            </div>
+                            <canvas id="paidHairBets"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Bets</h3>
+                            </div>
+                            <canvas id="allHairBets"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <ul class="card-text">
+                        <li>Total Bets: {% if bHairData[0] %}{{ bHairData[0] }}{% else %}0{% endif %}</li>
+                        <li>Total Paid Bets: {% if bHairData[1] %}{{ bHairData[1]}}{% else %}0{% endif %}</li>
+                        <li>Total Pot Value: ${% if bHairData[2] %}{{ bHairData[2] }}{% else %}0{% endif %}</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <div class="card" style="width: 288px;">
-            <canvas class="card-img-top" id="allHairBets" width="288" height="180"></canvas>
-            <div class="card-body">
-                <h5 class="card-title">All Hair Color Bets</h5>
-                <ul class="card-text">
-                    <li>Total Bets: {% if bHairData[0] %}{{ bHairData[0] }}{% else %}0{% endif %}</li>
-                    <li>Total Paid Bets: {% if bHairData[1] %}{{ bHairData[1] }}{% else %}0{% endif %}</li>
-                </ul>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">First Name Initial Bets</h1>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Paid Bets</h3>
+                            </div>
+                            <canvas id="paidFNameBets"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Bets</h3>
+                            </div>
+                            <canvas id="allFNameBets"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <ul class="card-text">
+                        <li>Total Bets: {% if bFNameData[0] %}{{ bFNameData[0] }}{% else %}0{% endif %}</li>
+                        <li>Total Paid Bets: {% if bFNameData[1] %}{{ bFNameData[1]}}{% else %}0{% endif %}</li>
+                        <li>Total Pot Value: ${% if bFNameData[2] %}{{ bFNameData[2] }}{% else %}0{% endif %}</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-            <div class="card" style="width: 288px;">
-            <canvas class="card-img-top" id="allFNameBets" width="288" height="180"></canvas>
-            <div class="card-body">
-                <h5 class="card-title">All First Initial Bets</h5>
-                <ul class="card-text">
-                    <li>Total Bets: {% if bFNameData[0] %}{{ bFNameData[0] }}{% else %}0{% endif %}</li>
-                    <li>Total Paid Bets: {% if bFNameData[1] %}{{ bFNameData[1] }}{% else %}0{% endif %}</li>
-                </ul>
+                <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Middle Name Initial Bets</h1>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Paid Bets</h3>
+                            </div>
+                            <canvas id="paidMNameBets"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="thumbnail">
+                            <div class="caption">
+                                <h3>All Bets</h3>
+                            </div>
+                            <canvas id="allMNameBets"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <ul class="card-text">
+                        <li>Total Bets: {% if bMNameData[0] %}{{ bMNameData[0] }}{% else %}0{% endif %}</li>
+                        <li>Total Paid Bets: {% if bMNameData[1] %}{{ bMNameData[1]}}{% else %}0{% endif %}</li>
+                        <li>Total Pot Value: ${% if bMNameData[2] %}{{ bMNameData[2] }}{% else %}0{% endif %}</li>
+                    </ul>
+                </div>
             </div>
         </div>
-
-        <div class="card" style="width: 288px;">
-            <canvas class="card-img-top" id="allMNameBets" width="288" height="180"></canvas>
-            <div class="card-body">
-                <h5 class="card-title">All Middle Initial Bets</h5>
-                <ul class="card-text">
-                    <li>Total Bets: {% if bMNameData[0] %}{{ bMNameData[0] }}{% else %}0{% endif %}</li>
-                    <li>Total Paid Bets: {% if bMNameData[1] %}{{ bMNameData[1] }}{% else %}0{% endif %}</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    
 
     <script>
 
