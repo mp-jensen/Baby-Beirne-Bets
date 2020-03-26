@@ -155,37 +155,37 @@ def betsPlaced():
     # for each type of bet, if it was submitted, enter it as a bet
     if 'birthDate' in request.form:
         bDateData = (userID, request.form['birthDate'])
-        query = "INSERT INTO user_bDate (userID, bDateID, amountBet) VALUES (%s, %s, 0);"
+        query = "INSERT INTO user_bDate (userID, bDateID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bDateData)
         bDate = True
     if 'birthHour' in request.form and 'birthMinute' in request.form:
         bTimeData = (userID, request.form['birthHour'], request.form['birthMinute'])
-        query = "INSERT INTO user_bTime (userID, bHourID, bMinuteID, amountBet) VALUES (%s,%s,%s,0);"
+        query = "INSERT INTO user_bTime (userID, bHourID, bMinuteID) VALUES (%s,%s,%s);"
         execute_query(dbConnection, query, bTimeData)
         bTime = True
     if 'birthLb' in request.form and 'birthOz' in request.form:
         bWeightData = (userID, request.form['birthLb'], request.form['birthOz'])
-        query = "INSERT INTO user_bWeight (userID, bLbID, bOzID, amountBet) VALUES (%s,%s,%s,0);"
+        query = "INSERT INTO user_bWeight (userID, bLbID, bOzID) VALUES (%s,%s,%s);"
         execute_query(dbConnection, query, bWeightData)
         bWeight = True
     if 'birthLength' in request.form:
         bLengthData = (userID, request.form['birthLength'])
-        query = "INSERT INTO user_bLength (userID, bLengthID, amountBet) VALUES (%s,%s,0);"
+        query = "INSERT INTO user_bLength (userID, bLengthID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bLengthData)
         bLength = True
     if 'birthHair' in request.form:
         bHairData = (userID, request.form['birthHair'])
-        query = "INSERT INTO user_bHair (userID, bHairID, amountBet) VALUES (%s,%s,0);"
+        query = "INSERT INTO user_bHair (userID, bHairID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bHairData)
         bHair = True
     if 'birthFN' in request.form:
         bFNData = (userID, request.form['birthFN'])
-        query = "INSERT INTO user_bFName (userID, bFNameID, amountBet) VALUES (%s,%s,0);"
+        query = "INSERT INTO user_bFName (userID, bFNameID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bFNData)
         bFName = True
     if 'birthMN' in request.form:
         bMNData = (userID, request.form['birthMN'])
-        query = "INSERT INTO user_bMName (userID, bMNameID, amountBet) VALUES (%s,%s,0);"
+        query = "INSERT INTO user_bMName (userID, bMNameID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bMNData)
         bMName= True
 
