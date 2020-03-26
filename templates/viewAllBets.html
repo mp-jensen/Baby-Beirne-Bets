@@ -740,8 +740,8 @@
         {% for value in bHairData[4] %}
             paidHairCounts.push({{ value[0] }});
             paidHairBets.push('{{ value[1] }}');
-            pbhBackgroundColor.push(paidBackgroundColor[pbhColorCount]);
-            pbhBorderColor.push(paidBorderColor[pbhColorCount]);
+            pbhBackgroundColor.push(allBackgroundColor[pbhColorCount]);
+            pbhBorderColor.push(allBorderColor[pbhColorCount]);
             pbhColorCount++;
             if (pbhColorCount == colorTypes) { pbhColorCount=0; }
         {% endfor %}
