@@ -364,7 +364,7 @@ def viewAllBets():
     paidBMNameBets = False
     bMNameData = (bMNameCount, bMNamePaidCount, bMNameValue, allBMNameBets, paidBMNameBets)
 
-    return render_template('viewAllBets.html', bDateData=bDateData,bTimeData=bTimeData,bLengthData=bLengthData,bHairData=bHairData,bFNameData=bFNameData,bMNameData=bMNameData)
+    return render_template('viewAllBets.html', bDateData=bDateData,bWeightData=bWeightData,bTimeData=bTimeData,bLengthData=bLengthData,bHairData=bHairData,bFNameData=bFNameData,bMNameData=bMNameData)
 
 
 @app.route('/winners')
