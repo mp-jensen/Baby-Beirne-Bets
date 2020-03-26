@@ -24,8 +24,8 @@
             <div class="card-body">
                 <h5 class="card-title">All Birth Time Bets</h5>
                 <ul class="card-text">
-                    <li>Total Bets: </li>
-                    <li>Total Paid Bets: </li>
+                    <li>Total Bets: {% if bTimeData[0] %}{{ bTimeData[0][0] }}{% else %}0{% endif %}</li>
+                    <li>Total Paid Bets: {% if bTimeData[1] %}{{ bTimeData[1][0]}}{% else %}0{% endif %}</li>
                 </ul>
             </div>
         </div>
@@ -35,8 +35,8 @@
             <div class="card-body">
                 <h5 class="card-title">All Birth Weight Bets</h5>
                 <ul class="card-text">
-                    <li>Total Bets: </li>
-                    <li>Total Paid Bets: </li>
+                    <li>Total Bets: {% if bWeightData[0] %}{{ bWeightData[0][0] }}{% else %}0{% endif %}</li>
+                    <li>Total Paid Bets: {% if bWeightData[1] %}{{ bWeightData[1][0]}}{% else %}0{% endif %}</li>
                 </ul>
             </div>
         </div>
@@ -46,8 +46,8 @@
             <div class="card-body">
                 <h5 class="card-title">All Birth Length Bets</h5>
                 <ul class="card-text">
-                    <li>Total Bets: </li>
-                    <li>Total Paid Bets: </li>
+                    <li>Total Bets: {% if bLengthData[0] %}{{ bLengthData[0][0] }}{% else %}0{% endif %}</li>
+                    <li>Total Paid Bets: {% if bLengthData[1] %}{{ bLengthData[1][0]}}{% else %}0{% endif %}</li>
                 </ul>
             </div>
         </div>
@@ -57,8 +57,8 @@
             <div class="card-body">
                 <h5 class="card-title">All Hair Color Bets</h5>
                 <ul class="card-text">
-                    <li>Total Bets: </li>
-                    <li>Total Paid Bets: </li>
+                    <li>Total Bets: {% if bHairData[0] %}{{ bHairData[0][0] }}{% else %}0{% endif %}</li>
+                    <li>Total Paid Bets: {% if bHairData[1] %}{{ bHairData[1][0]}}{% else %}0{% endif %}</li>
                 </ul>
             </div>
         </div>
@@ -68,8 +68,8 @@
             <div class="card-body">
                 <h5 class="card-title">All First Initial Bets</h5>
                 <ul class="card-text">
-                    <li>Total Bets: </li>
-                    <li>Total Paid Bets: </li>
+                    <li>Total Bets: {% if bFNameData[0] %}{{ bFNameData[0][0] }}{% else %}0{% endif %}</li>
+                    <li>Total Paid Bets: {% if bFNameData[1] %}{{ bFNameData[1][0]}}{% else %}0{% endif %}</li>
                 </ul>
             </div>
         </div>
@@ -79,49 +79,14 @@
             <div class="card-body">
                 <h5 class="card-title">All Middle Initial Bets</h5>
                 <ul class="card-text">
-                    <li>Total Bets: </li>
-                    <li>Total Paid Bets: </li>
+                    <li>Total Bets: {% if bMNameData[0] %}{{ bMNameData[0][0] }}{% else %}0{% endif %}</li>
+                    <li>Total Paid Bets: {% if bMNameData[1] %}{{ bMNameData[1][0]}}{% else %}0{% endif %}</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <script>
-        {% if bDateData[3] %}
-        var allBDateEle = document.getElementById('allDateBets');
-        var allDateBets = [];
-        var allDateCounts = [];
-        {% for value in bDateData[3] %}
-            allDateCounts.push({{ value[0] }});
-            allDateBets.push('{{ value[1] }}');
-        {% endfor %}
-        var allbDateChar = new Chart(allBDateEle, {
-            type: 'horizontalBar',
-            data: {
-                labels: allDateBets,
-                datasets: [{
-                    data: allDateCounts
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "# of Bets"
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 1
-                        }
-                    }]
-                }
-            }
-        });
-        {% endif %}
-    </script>
+    <script src="{{ url_for('static', filename='js/allDateBets.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/allTimeBets.js') }}"></script>
 
 {% endblock %}
