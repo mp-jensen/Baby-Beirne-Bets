@@ -1,4 +1,4 @@
-        {% if bDateData[3] %}
+        {% if bTimeData[3] %}
         var allBTimeEle = document.getElementById('allTimeBets');
         var allTimeBets = [];
         var allTimeCounts = [];

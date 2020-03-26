@@ -87,7 +87,7 @@
     </div>
 
     <script>
-           {% if bDateData[3] %}
+        {% if bDateData[3] %}
         var allBDateEle = document.getElementById('allDateBets');
         var allDateBets = [];
         var allDateCounts = [];
@@ -124,6 +124,6 @@
         });
         {% endif %}
     </script>
-    <script src="{{ url_for('static', filename='js/allTimeBets.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/AllTimeBets.js') }}"></script>
 
 {% endblock %}
