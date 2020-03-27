@@ -10,6 +10,9 @@ def welcome():
     print(request)
     return render_template('welcome.html')
 
+@app.route('/danAndAsha')
+def danAndAsha():
+    return render_template('danAndAsha.html')
 
 @app.route('/placeBets', methods=["POST","GET"])
 def placeBets():
@@ -155,37 +158,37 @@ def betsPlaced():
     # for each type of bet, if it was submitted, enter it as a bet
     if 'birthDate' in request.form:
         bDateData = (userID, request.form['birthDate'])
-        query = "INSERT INTO user_bDate (userID, bDateID, amountBet) VALUES (%s, %s, 0);"
+        query = "INSERT INTO user_bDate (userID, bDateID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bDateData)
         bDate = True
     if 'birthHour' in request.form and 'birthMinute' in request.form:
         bTimeData = (userID, request.form['birthHour'], request.form['birthMinute'])
-        query = "INSERT INTO user_bTime (userID, bHourID, bMinuteID, amountBet) VALUES (%s,%s,%s,0);"
+        query = "INSERT INTO user_bTime (userID, bHourID, bMinuteID) VALUES (%s,%s,%s);"
         execute_query(dbConnection, query, bTimeData)
         bTime = True
     if 'birthLb' in request.form and 'birthOz' in request.form:
         bWeightData = (userID, request.form['birthLb'], request.form['birthOz'])
-        query = "INSERT INTO user_bWeight (userID, bLbID, bOzID, amountBet) VALUES (%s,%s,%s,0);"
+        query = "INSERT INTO user_bWeight (userID, bLbID, bOzID) VALUES (%s,%s,%s);"
         execute_query(dbConnection, query, bWeightData)
         bWeight = True
     if 'birthLength' in request.form:
         bLengthData = (userID, request.form['birthLength'])
-        query = "INSERT INTO user_bLength (userID, bLengthID, amountBet) VALUES (%s,%s,0);"
+        query = "INSERT INTO user_bLength (userID, bLengthID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bLengthData)
         bLength = True
     if 'birthHair' in request.form:
         bHairData = (userID, request.form['birthHair'])
-        query = "INSERT INTO user_bHair (userID, bHairID, amountBet) VALUES (%s,%s,0);"
+        query = "INSERT INTO user_bHair (userID, bHairID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bHairData)
         bHair = True
     if 'birthFN' in request.form:
         bFNData = (userID, request.form['birthFN'])
-        query = "INSERT INTO user_bFName (userID, bFNameID, amountBet) VALUES (%s,%s,0);"
+        query = "INSERT INTO user_bFName (userID, bFNameID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bFNData)
         bFName = True
     if 'birthMN' in request.form:
         bMNData = (userID, request.form['birthMN'])
-        query = "INSERT INTO user_bMName (userID, bMNameID, amountBet) VALUES (%s,%s,0);"
+        query = "INSERT INTO user_bMName (userID, bMNameID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bMNData)
         bMName= True
 
@@ -306,17 +309,180 @@ def viewAllBets():
     dbConnection = connect_to_database()
 
     bDateCount = execute_query(dbConnection, "SELECT count(*) FROM user_bDate;")
-    bDateCount = False if bDateCount.rowcount < 1 else bDateCount.fetchall()
+    bDateCount = False if bDateCount.rowcount < 1 else bDateCount.fetchone()[0]
     bDatePaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bDate WHERE paidStatus > 0;")
-    bDatePaidCount = False if bDatePaidCount.rowcount < 1 else bDatePaidCount.fetchall()
+    bDatePaidCount = False if bDatePaidCount.rowcount < 1 else bDatePaidCount.fetchone()[0]
     bDateValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bDate WHERE paidStatus > 0;")
-    bDateValue = False if bDateValue.rowcount < 1 else bDateValue.fetchall()
+    bDateValue = False if bDateValue.rowcount < 1 else bDateValue.fetchone()[0]
     allBDateBets = execute_query(dbConnection, "SELECT count(*),bd.date FROM user_bDate ubd INNER JOIN bDate bd ON ubd.bDateID=bd.bDateID GROUP BY bd.bDateID;")
     allBDateBets = False if allBDateBets.rowcount < 1 else allBDateBets.fetchall()
     paidBDateBets = execute_query(dbConnection, "SELECT count(*),bd.date FROM user_bDate ubd INNER JOIN bDate bd ON ubd.bDateID=bd.bDateID WHERE ubd.paidStatus>0 GROUP BY bd.bDateID;")
     paidBDateBets = False if paidBDateBets.rowcount < 1 else paidBDateBets.fetchall()
     bDateData = (bDateCount, bDatePaidCount, bDateValue, allBDateBets, paidBDateBets)
-    return render_template('viewAllBets.html', bDateData=bDateData)
+
+    bTimeCount = execute_query(dbConnection, "SELECT count(*) FROM user_bTime;")
+    bTimeCount = False if bTimeCount.rowcount < 1 else bTimeCount.fetchone()[0]
+    bTimePaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bWeight WHERE paidStatus > 0;")
+    bTimePaidCount = False if bTimePaidCount.rowcount < 1 else bTimePaidCount.fetchone()[0]
+    bTimeValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bTime WHERE paidStatus > 0;")
+    bTimeValue = False if bTimeValue.rowcount < 1 else bTimeValue.fetchone()[0]
+    allBTimeBets = execute_query(dbConnection, "SELECT count(*),bh.hour,bm.minute FROM user_bTime ubt INNER JOIN bHour bh ON ubt.bHourID=bh.bHourID INNER JOIN bMinute bm ON ubt.bMinuteID=bm.bMinuteID GROUP BY ubt.bHourID, ubt.bMinuteID;")
+    allBTimeBets = False if allBTimeBets.rowcount < 1 else allBTimeBets.fetchall()
+    paidBTimeBets = execute_query(dbConnection, "SELECT count(*),bh.hour,bm.minute FROM user_bTime ubt INNER JOIN bHour bh ON ubt.bHourID=bh.bHourID INNER JOIN bMinute bm ON ubt.bMinuteID=bm.bMinuteID WHERE ubt.paidStatus>0 GROUP BY ubt.bHourID, ubt.bMinuteID;")
+    paidBTimeBets = False if paidBTimeBets.rowcount < 1 else paidBTimeBets.fetchall()
+    bTimeData = (bTimeCount, bTimePaidCount, bTimeValue, allBTimeBets, paidBTimeBets)
+
+    bWeightCount = execute_query(dbConnection, "SELECT count(*) FROM user_bWeight;")
+    bWeightCount = False if bWeightCount.rowcount < 1 else bWeightCount.fetchone()[0]
+    bWeightPaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bWeight WHERE paidStatus > 0;")
+    bWeightPaidCount = False if bWeightPaidCount.rowcount < 1 else bWeightPaidCount.fetchone()[0]
+    bWeightValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bWeight WHERE paidStatus > 0;")
+    bWeightValue = False if bWeightValue.rowcount < 1 else bWeightValue.fetchone()[0]
+    allBWeightBets = execute_query(dbConnection, "SELECT count(*),bl.lb,bo.oz FROM user_bWeight ubw INNER JOIN bLb bl ON ubw.bLbID=bl.bLbID INNER JOIN bOz bo ON ubw.bOzID=bo.bOzID GROUP BY ubw.bLbID, ubw.bOzID;")
+    allBWeightBets = False if allBWeightBets.rowcount < 1 else allBWeightBets.fetchall()
+    paidBWeightBets = execute_query(dbConnection, "SELECT count(*),bl.lb,bo.oz FROM user_bWeight ubw INNER JOIN bLb bl ON ubw.bLbID=bl.bLbID INNER JOIN bOz bo ON ubw.bOzID=bo.bOzID WHERE ubw.paidStatus>0 GROUP BY ubw.bLbID, ubw.bOzID;")
+    paidBWeightBets = False if paidBWeightBets.rowcount < 1 else paidBWeightBets.fetchall()
+    bWeightData = (bWeightCount, bWeightPaidCount, bWeightValue, allBWeightBets, paidBWeightBets)
+
+    bLengthCount = execute_query(dbConnection, "SELECT count(*) FROM user_bLength;")
+    bLengthCount = False if bLengthCount.rowcount < 1 else bLengthCount.fetchone()[0]
+    bLengthPaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bLength WHERE paidStatus > 0;")
+    bLengthPaidCount = False if bLengthPaidCount.rowcount < 1 else bLengthPaidCount.fetchone()[0]
+    bLengthValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bLength WHERE paidStatus > 0;")
+    bLengthValue = False if bLengthValue.rowcount < 1 else bLengthValue.fetchone()[0]
+    allBLengthBets = execute_query(dbConnection, "SELECT count(*),bl.inches FROM user_bLength ubl INNER JOIN bLength bl ON ubl.bLengthID=bl.bLengthID GROUP BY ubl.bLengthID;")
+    allBLengthBets = False if allBLengthBets.rowcount < 1 else allBLengthBets.fetchall()
+    paidBLengthBets = execute_query(dbConnection, "SELECT count(*),bl.inches FROM user_bLength ubl INNER JOIN bLength bl ON ubl.bLengthID=bl.bLengthID WHERE ubl.paidStatus>0 GROUP BY ubl.bLengthID;")
+    paidBLengthBets = False if paidBLengthBets.rowcount < 1 else paidBLengthBets.fetchall()
+    bLengthData = (bLengthCount, bLengthPaidCount, bLengthValue, allBLengthBets, paidBLengthBets)
+
+    bHairCount = execute_query(dbConnection, "SELECT count(*) FROM user_bHair;")
+    bHairCount = False if bHairCount.rowcount < 1 else bHairCount.fetchone()[0]
+    bHairPaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bHair WHERE paidStatus > 0;")
+    bHairPaidCount = False if bHairPaidCount.rowcount < 1 else bHairPaidCount.fetchone()[0]
+    bHairValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bHair WHERE paidStatus > 0;")
+    bHairValue = False if bHairValue.rowcount < 1 else bHairValue.fetchone()[0]
+    allBHairBets = execute_query(dbConnection, "SELECT count(*),bh.hair FROM user_bHair ubh INNER JOIN bHair bh ON ubh.bHairID=bh.bHairID GROUP BY ubh.bHairID;")
+    allBHairBets = False if allBHairBets.rowcount < 1 else allBHairBets.fetchall()
+    paidBHairBets = execute_query(dbConnection, "SELECT count(*),bh.hair FROM user_bHair ubh INNER JOIN bHair bh ON ubh.bHairID=bh.bHairID WHERE ubh.paidStatus>0 GROUP BY ubh.bHairID;")
+    paidBHairBets = False if paidBHairBets.rowcount < 1 else paidBHairBets.fetchall()
+    bHairData = (bHairCount, bHairPaidCount, bHairValue, allBHairBets, paidBHairBets)
+
+    bFNameCount = execute_query(dbConnection, "SELECT count(*) FROM user_bFName;")
+    bFNameCount = False if bFNameCount.rowcount < 1 else bFNameCount.fetchone()[0]
+    bFNamePaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bFName WHERE paidStatus > 0;")
+    bFNamePaidCount = False if bFNamePaidCount.rowcount < 1 else bFNamePaidCount.fetchone()[0]
+    bFNameValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bFName WHERE paidStatus > 0;")
+    bFNameValue = False if bFNameValue.rowcount < 1 else bFNameValue.fetchone()[0]
+    allBFNameBets = execute_query(dbConnection, "SELECT count(*),bf.letter FROM user_bFName ubf INNER JOIN bFName bf ON ubf.bFNameID=bf.bFNameID GROUP BY ubf.bFNameID;")
+    allBFNameBets = False if allBFNameBets.rowcount < 1 else allBFNameBets.fetchall()
+    paidBFNameBets = execute_query(dbConnection, "SELECT count(*),bf.letter FROM user_bFName ubf INNER JOIN bFName bf ON ubf.bFNameID=bf.bFNameID WHERE ubf.paidStatus>0 GROUP BY ubf.bFNameID;")
+    paidBFNameBets = False if paidBFNameBets.rowcount < 1 else paidBFNameBets.fetchall()
+    bFNameData = (bFNameCount, bFNamePaidCount, bFNameValue, allBFNameBets, paidBFNameBets)
+
+    bMNameCount = execute_query(dbConnection, "SELECT count(*) FROM user_bMName;")
+    bMNameCount = False if bMNameCount.rowcount < 1 else bMNameCount.fetchone()[0]
+    bMNamePaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bMName WHERE paidStatus > 0;")
+    bMNamePaidCount = False if bMNamePaidCount.rowcount < 1 else bMNamePaidCount.fetchone()[0]
+    bMNameValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bMName WHERE paidStatus > 0;")
+    bMNameValue = False if bMNameValue.rowcount < 1 else bMNameValue.fetchone()[0]
+    allBMNameBets = execute_query(dbConnection, "SELECT count(*),bm.letter FROM user_bMName ubm INNER JOIN bMName bm ON ubm.bMNameID=bm.bMNameID GROUP BY ubm.bMNameID;")
+    allBMNameBets = False if allBMNameBets.rowcount < 1 else allBMNameBets.fetchall()
+    paidBMNameBets = execute_query(dbConnection, "SELECT count(*),bm.letter FROM user_bMName ubm INNER JOIN bMName bm ON ubm.bMNameID=bm.bMNameID WHERE ubm.paidStatus>0 GROUP BY ubm.bMNameID;")
+    paidBMNameBets = False if paidBMNameBets.rowcount < 1 else paidBMNameBets.fetchall()
+    bMNameData = (bMNameCount, bMNamePaidCount, bMNameValue, allBMNameBets, paidBMNameBets)
+
+    return render_template('viewAllBets.html', bDateData=bDateData,bWeightData=bWeightData,bTimeData=bTimeData,bLengthData=bLengthData,bHairData=bHairData,bFNameData=bFNameData,bMNameData=bMNameData)
+
+@app.route('/viewPaidBets')
+def viewPaidBets():
+    dbConnection = connect_to_database()
+
+    bDateCount = execute_query(dbConnection, "SELECT count(*) FROM user_bDate;")
+    bDateCount = False if bDateCount.rowcount < 1 else bDateCount.fetchone()[0]
+    bDatePaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bDate WHERE paidStatus > 0;")
+    bDatePaidCount = False if bDatePaidCount.rowcount < 1 else bDatePaidCount.fetchone()[0]
+    bDateValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bDate WHERE paidStatus > 0;")
+    bDateValue = False if bDateValue.rowcount < 1 else bDateValue.fetchone()[0]
+    allBDateBets = execute_query(dbConnection, "SELECT count(*),bd.date FROM user_bDate ubd INNER JOIN bDate bd ON ubd.bDateID=bd.bDateID GROUP BY bd.bDateID;")
+    allBDateBets = False if allBDateBets.rowcount < 1 else allBDateBets.fetchall()
+    paidBDateBets = execute_query(dbConnection, "SELECT count(*),bd.date FROM user_bDate ubd INNER JOIN bDate bd ON ubd.bDateID=bd.bDateID WHERE ubd.paidStatus>0 GROUP BY bd.bDateID;")
+    paidBDateBets = False if paidBDateBets.rowcount < 1 else paidBDateBets.fetchall()
+    bDateData = (bDateCount, bDatePaidCount, bDateValue, allBDateBets, paidBDateBets)
+
+    bTimeCount = execute_query(dbConnection, "SELECT count(*) FROM user_bTime;")
+    bTimeCount = False if bTimeCount.rowcount < 1 else bTimeCount.fetchone()[0]
+    bTimePaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bWeight WHERE paidStatus > 0;")
+    bTimePaidCount = False if bTimePaidCount.rowcount < 1 else bTimePaidCount.fetchone()[0]
+    bTimeValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bTime WHERE paidStatus > 0;")
+    bTimeValue = False if bTimeValue.rowcount < 1 else bTimeValue.fetchone()[0]
+    allBTimeBets = execute_query(dbConnection, "SELECT count(*),bh.hour,bm.minute FROM user_bTime ubt INNER JOIN bHour bh ON ubt.bHourID=bh.bHourID INNER JOIN bMinute bm ON ubt.bMinuteID=bm.bMinuteID GROUP BY ubt.bHourID, ubt.bMinuteID;")
+    allBTimeBets = False if allBTimeBets.rowcount < 1 else allBTimeBets.fetchall()
+    paidBTimeBets = execute_query(dbConnection, "SELECT count(*),bh.hour,bm.minute FROM user_bTime ubt INNER JOIN bHour bh ON ubt.bHourID=bh.bHourID INNER JOIN bMinute bm ON ubt.bMinuteID=bm.bMinuteID WHERE ubt.paidStatus>0 GROUP BY ubt.bHourID, ubt.bMinuteID;")
+    paidBTimeBets = False if paidBTimeBets.rowcount < 1 else paidBTimeBets.fetchall()
+    bTimeData = (bTimeCount, bTimePaidCount, bTimeValue, allBTimeBets, paidBTimeBets)
+
+    bWeightCount = execute_query(dbConnection, "SELECT count(*) FROM user_bWeight;")
+    bWeightCount = False if bWeightCount.rowcount < 1 else bWeightCount.fetchone()[0]
+    bWeightPaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bWeight WHERE paidStatus > 0;")
+    bWeightPaidCount = False if bWeightPaidCount.rowcount < 1 else bWeightPaidCount.fetchone()[0]
+    bWeightValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bWeight WHERE paidStatus > 0;")
+    bWeightValue = False if bWeightValue.rowcount < 1 else bWeightValue.fetchone()[0]
+    allBWeightBets = execute_query(dbConnection, "SELECT count(*),bl.lb,bo.oz FROM user_bWeight ubw INNER JOIN bLb bl ON ubw.bLbID=bl.bLbID INNER JOIN bOz bo ON ubw.bOzID=bo.bOzID GROUP BY ubw.bLbID, ubw.bOzID;")
+    allBWeightBets = False if allBWeightBets.rowcount < 1 else allBWeightBets.fetchall()
+    paidBWeightBets = execute_query(dbConnection, "SELECT count(*),bl.lb,bo.oz FROM user_bWeight ubw INNER JOIN bLb bl ON ubw.bLbID=bl.bLbID INNER JOIN bOz bo ON ubw.bOzID=bo.bOzID WHERE ubw.paidStatus>0 GROUP BY ubw.bLbID, ubw.bOzID;")
+    paidBWeightBets = False if paidBWeightBets.rowcount < 1 else paidBWeightBets.fetchall()
+    bWeightData = (bWeightCount, bWeightPaidCount, bWeightValue, allBWeightBets, paidBWeightBets)
+
+    bLengthCount = execute_query(dbConnection, "SELECT count(*) FROM user_bLength;")
+    bLengthCount = False if bLengthCount.rowcount < 1 else bLengthCount.fetchone()[0]
+    bLengthPaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bLength WHERE paidStatus > 0;")
+    bLengthPaidCount = False if bLengthPaidCount.rowcount < 1 else bLengthPaidCount.fetchone()[0]
+    bLengthValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bLength WHERE paidStatus > 0;")
+    bLengthValue = False if bLengthValue.rowcount < 1 else bLengthValue.fetchone()[0]
+    allBLengthBets = execute_query(dbConnection, "SELECT count(*),bl.inches FROM user_bLength ubl INNER JOIN bLength bl ON ubl.bLengthID=bl.bLengthID GROUP BY ubl.bLengthID;")
+    allBLengthBets = False if allBLengthBets.rowcount < 1 else allBLengthBets.fetchall()
+    paidBLengthBets = execute_query(dbConnection, "SELECT count(*),bl.inches FROM user_bLength ubl INNER JOIN bLength bl ON ubl.bLengthID=bl.bLengthID WHERE ubl.paidStatus>0 GROUP BY ubl.bLengthID;")
+    paidBLengthBets = False if paidBLengthBets.rowcount < 1 else paidBLengthBets.fetchall()
+    bLengthData = (bLengthCount, bLengthPaidCount, bLengthValue, allBLengthBets, paidBLengthBets)
+
+    bHairCount = execute_query(dbConnection, "SELECT count(*) FROM user_bHair;")
+    bHairCount = False if bHairCount.rowcount < 1 else bHairCount.fetchone()[0]
+    bHairPaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bHair WHERE paidStatus > 0;")
+    bHairPaidCount = False if bHairPaidCount.rowcount < 1 else bHairPaidCount.fetchone()[0]
+    bHairValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bHair WHERE paidStatus > 0;")
+    bHairValue = False if bHairValue.rowcount < 1 else bHairValue.fetchone()[0]
+    allBHairBets = execute_query(dbConnection, "SELECT count(*),bh.hair FROM user_bHair ubh INNER JOIN bHair bh ON ubh.bHairID=bh.bHairID GROUP BY ubh.bHairID;")
+    allBHairBets = False if allBHairBets.rowcount < 1 else allBHairBets.fetchall()
+    paidBHairBets = execute_query(dbConnection, "SELECT count(*),bh.hair FROM user_bHair ubh INNER JOIN bHair bh ON ubh.bHairID=bh.bHairID WHERE ubh.paidStatus>0 GROUP BY ubh.bHairID;")
+    paidBHairBets = False if paidBHairBets.rowcount < 1 else paidBHairBets.fetchall()
+    bHairData = (bHairCount, bHairPaidCount, bHairValue, allBHairBets, paidBHairBets)
+
+    bFNameCount = execute_query(dbConnection, "SELECT count(*) FROM user_bFName;")
+    bFNameCount = False if bFNameCount.rowcount < 1 else bFNameCount.fetchone()[0]
+    bFNamePaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bFName WHERE paidStatus > 0;")
+    bFNamePaidCount = False if bFNamePaidCount.rowcount < 1 else bFNamePaidCount.fetchone()[0]
+    bFNameValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bFName WHERE paidStatus > 0;")
+    bFNameValue = False if bFNameValue.rowcount < 1 else bFNameValue.fetchone()[0]
+    allBFNameBets = execute_query(dbConnection, "SELECT count(*),bf.letter FROM user_bFName ubf INNER JOIN bFName bf ON ubf.bFNameID=bf.bFNameID GROUP BY ubf.bFNameID;")
+    allBFNameBets = False if allBFNameBets.rowcount < 1 else allBFNameBets.fetchall()
+    paidBFNameBets = execute_query(dbConnection, "SELECT count(*),bf.letter FROM user_bFName ubf INNER JOIN bFName bf ON ubf.bFNameID=bf.bFNameID WHERE ubf.paidStatus>0 GROUP BY ubf.bFNameID;")
+    paidBFNameBets = False if paidBFNameBets.rowcount < 1 else paidBFNameBets.fetchall()
+    bFNameData = (bFNameCount, bFNamePaidCount, bFNameValue, allBFNameBets, paidBFNameBets)
+
+    bMNameCount = execute_query(dbConnection, "SELECT count(*) FROM user_bMName;")
+    bMNameCount = False if bMNameCount.rowcount < 1 else bMNameCount.fetchone()[0]
+    bMNamePaidCount = execute_query(dbConnection, "SELECT count(*) FROM user_bMName WHERE paidStatus > 0;")
+    bMNamePaidCount = False if bMNamePaidCount.rowcount < 1 else bMNamePaidCount.fetchone()[0]
+    bMNameValue = execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bMName WHERE paidStatus > 0;")
+    bMNameValue = False if bMNameValue.rowcount < 1 else bMNameValue.fetchone()[0]
+    allBMNameBets = execute_query(dbConnection, "SELECT count(*),bm.letter FROM user_bMName ubm INNER JOIN bMName bm ON ubm.bMNameID=bm.bMNameID GROUP BY ubm.bMNameID;")
+    allBMNameBets = False if allBMNameBets.rowcount < 1 else allBMNameBets.fetchall()
+    paidBMNameBets = execute_query(dbConnection, "SELECT count(*),bm.letter FROM user_bMName ubm INNER JOIN bMName bm ON ubm.bMNameID=bm.bMNameID WHERE ubm.paidStatus>0 GROUP BY ubm.bMNameID;")
+    paidBMNameBets = False if paidBMNameBets.rowcount < 1 else paidBMNameBets.fetchall()
+    bMNameData = (bMNameCount, bMNamePaidCount, bMNameValue, allBMNameBets, paidBMNameBets)
+
+    return render_template('viewPaidBets.html', bDateData=bDateData,bWeightData=bWeightData,bTimeData=bTimeData,bLengthData=bLengthData,bHairData=bHairData,bFNameData=bFNameData,bMNameData=bMNameData)
 
 
 @app.route('/winners')

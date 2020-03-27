@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}View All Bets{% endblock %}
+{% block title %}View Paid Bets{% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="page-header">
-            <h1>Current Bets, Paid and Unpaid</h1>
+            <h1>Current Paid Bets</h1>
         </div>
 
         <div class="panel panel-default">
@@ -14,20 +14,12 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="thumbnail">
                             <div class="caption">
                                 <h3>Paid Birth Date Bets</h3>
                             </div>
                             <canvas id="paidDateBets"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h3>All Birth Date Bets</h3>
-                            </div>
-                            <canvas id="allDateBets"></canvas>
                         </div>
                     </div>
                 </div>
@@ -47,20 +39,12 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="thumbnail">
                             <div class="caption">
                                 <h3>Paid Birth Time Bets</h3>
                             </div>
                             <canvas id="paidTimeBets"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h3>All Birth Time Bets</h3>
-                            </div>
-                            <canvas id="allTimeBets"></canvas>
                         </div>
                     </div>
                 </div>
@@ -80,20 +64,12 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="thumbnail">
                             <div class="caption">
                                 <h3>Paid Birth Weight Bets</h3>
                             </div>
                             <canvas id="paidWeightBets"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h3>All Birth Weight Bets</h3>
-                            </div>
-                            <canvas id="allWeightBets"></canvas>
                         </div>
                     </div>
                 </div>
@@ -113,20 +89,12 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="thumbnail">
                             <div class="caption">
                                 <h3>Paid Birth Length Bets</h3>
                             </div>
                             <canvas id="paidLengthBets"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h3>All Birth Length Bets</h3>
-                            </div>
-                            <canvas id="allLengthBets"></canvas>
                         </div>
                     </div>
                 </div>
@@ -146,20 +114,12 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="thumbnail">
                             <div class="caption">
                                 <h3>Paid Hair Color Bets</h3>
                             </div>
                             <canvas id="paidHairBets"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h3>All Hair Color Bets</h3>
-                            </div>
-                            <canvas id="allHairBets"></canvas>
                         </div>
                     </div>
                 </div>
@@ -179,20 +139,12 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="thumbnail">
                             <div class="caption">
                                 <h3>Paid First Initial Bets</h3>
                             </div>
                             <canvas id="paidFNameBets"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h3>All First Initial Bets</h3>
-                            </div>
-                            <canvas id="allFNameBets"></canvas>
                         </div>
                     </div>
                 </div>
@@ -212,20 +164,12 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="thumbnail">
                             <div class="caption">
                                 <h3>Paid Middle Initial Bets</h3>
                             </div>
                             <canvas id="paidMNameBets"></canvas>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h3>All Middle Initial Bets</h3>
-                            </div>
-                            <canvas id="allMNameBets"></canvas>
                         </div>
                     </div>
                 </div>
@@ -259,58 +203,6 @@
         'rgba(255, 159, 64, 1)'
     ];
     var colorTypes = 6
-
-        {% if bDateData[3] %}
-        var allBDateEle = document.getElementById('allDateBets');
-        var allDateBets = [];
-        var allDateCounts = [];
-        var bdBackgroundColor = [];
-        var bdBorderColor = [];
-        var bdColorCount = 0;
-        {% for value in bDateData[3] %}
-            allDateCounts.push({{ value[0] }});
-            allDateBets.push('{{ value[1] }}');
-            bdBackgroundColor.push(allBackgroundColor[bdColorCount]);
-            bdBorderColor.push(allBorderColor[bdColorCount]);
-            bdColorCount++;
-            if (bdColorCount == colorTypes) { bdColorCount=0; }
-        {% endfor %}
-        var allbDateChar = new Chart(allBDateEle, {
-            type: 'horizontalBar',
-            data: {
-                labels: allDateBets,
-                datasets: [{
-                    data: allDateCounts,
-                    backgroundColor: bdBackgroundColor,
-                    borderColor: bdBorderColor
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "# of Bets"
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 1,
-                            suggestedMax: 3
-                        }
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "Date (yyyy-mm-dd)"
-                        }
-                    }]
-                }
-            }
-        });
-        {% endif %}
 
         {% if bDateData[4] %}
         var paidBDateEle = document.getElementById('paidDateBets');
@@ -357,58 +249,6 @@
                         scaleLabel: {
                             display: true,
                             labelString: "Date (yyyy-mm-dd)"
-                        }
-                    }]
-                }
-            }
-        });
-        {% endif %}
-
-        {% if bTimeData[3] %}
-        var allBTimeEle = document.getElementById('allTimeBets');
-        var allTimeBets = [];
-        var allTimeCounts = [];
-        var btBackgroundColor = [];
-        var btBorderColor = [];
-        var btColorCount = 0;
-        {% for value in bTimeData[3] %}
-            allTimeCounts.push({{ value[0] }});
-            allTimeBets.push('{{ value[1] }}h {{ value[2] }}m');
-            btBackgroundColor.push(allBackgroundColor[btColorCount]);
-            btBorderColor.push(allBorderColor[btColorCount]);
-            btColorCount++;
-            if (btColorCount == colorTypes) { btColorCount=0; }
-        {% endfor %}
-        var allbTimeChar = new Chart(allBTimeEle, {
-            type: 'horizontalBar',
-            data: {
-                labels: allTimeBets,
-                datasets: [{
-                    data: allTimeCounts,
-                    backgroundColor: btBackgroundColor,
-                    borderColor: btBorderColor
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "# of Bets"
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 1,
-                            suggestedMax: 3
-                        }
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "Time of Day (h,m)"
                         }
                     }]
                 }
@@ -468,59 +308,6 @@
         });
         {% endif %}
 
-
-        {% if bWeightData[3] %}
-        var allBWeightEle = document.getElementById('allWeightBets');
-        var allWeightBets = [];
-        var allWeightCounts = [];
-        var bwBackgroundColor = [];
-        var bwBorderColor = [];
-        var bwColorCount = 0;
-        {% for value in bWeightData[3] %}
-            allWeightCounts.push({{ value[0] }});
-            allWeightBets.push('{{ value[1] }}lb {{ value[2] }}oz');
-            bwBackgroundColor.push(allBackgroundColor[bwColorCount]);
-            bwBorderColor.push(allBorderColor[bwColorCount]);
-            bwColorCount++;
-            if (bwColorCount == colorTypes) { bwColorCount=0; }
-        {% endfor %}
-        var allbWeightChar = new Chart(allBWeightEle, {
-            type: 'horizontalBar',
-            data: {
-                labels: allWeightBets,
-                datasets: [{
-                    data: allWeightCounts,
-                    backgroundColor: bwBackgroundColor,
-                    borderColor: bwBorderColor
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "# of Bets"
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 1,
-                            suggestedMax: 3
-                        }
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "Weight (lb,oz)"
-                        }
-                    }]
-                }
-            }
-        });
-        {% endif %}
-
         {% if bWeightData[4] %}
         var paidBWeightEle = document.getElementById('paidWeightBets');
         var paidWeightBets = [];
@@ -573,59 +360,6 @@
         });
         {% endif %}
 
-
-        {% if bLengthData[3] %}
-        var allBLengthEle = document.getElementById('allLengthBets');
-        var allLengthBets = [];
-        var allLengthCounts = [];
-        var blBackgroundColor = [];
-        var blBorderColor = [];
-        var blColorCount = 0;
-        {% for value in bLengthData[3] %}
-            allLengthCounts.push({{ value[0] }});
-            allLengthBets.push('{{ value[1] }}');
-            blBackgroundColor.push(allBackgroundColor[blColorCount]);
-            blBorderColor.push(allBorderColor[blColorCount]);
-            blColorCount++;
-            if (blColorCount == colorTypes) { blColorCount=0; }
-        {% endfor %}
-        var allbLengthChar = new Chart(allBLengthEle, {
-            type: 'horizontalBar',
-            data: {
-                labels: allLengthBets,
-                datasets: [{
-                    data: allLengthCounts,
-                    backgroundColor: blBackgroundColor,
-                    borderColor: blBorderColor
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "# of Bets"
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 1,
-                            suggestedMax: 3
-                        }
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "Length (inches)"
-                        }
-                    }]
-                }
-            }
-        });
-        {% endif %}
-
         {% if bLengthData[4] %}
         var paidBLengthEle = document.getElementById('paidLengthBets');
         var paidLengthBets = [];
@@ -671,58 +405,6 @@
                         scaleLabel: {
                             display: true,
                             labelString: "Length (inches)"
-                        }
-                    }]
-                }
-            }
-        });
-        {% endif %}
-
-        {% if bHairData[3] %}
-        var allBHairEle = document.getElementById('allHairBets');
-        var allHairBets = [];
-        var allHairCounts = [];
-        var bhBackgroundColor = [];
-        var bhBorderColor = [];
-        var bhColorCount = 0;
-        {% for value in bHairData[3] %}
-            allHairCounts.push({{ value[0] }});
-            allHairBets.push('{{ value[1] }}');
-            bhBackgroundColor.push(allBackgroundColor[bhColorCount]);
-            bhBorderColor.push(allBorderColor[bhColorCount]);
-            bhColorCount++;
-            if (bhColorCount == colorTypes) { bhColorCount=0; }
-        {% endfor %}
-        var allbHairChar = new Chart(allBHairEle, {
-            type: 'horizontalBar',
-            data: {
-                labels: allHairBets,
-                datasets: [{
-                    data: allHairCounts,
-                    backgroundColor: bhBackgroundColor,
-                    borderColor: bhBorderColor
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "# of Bets"
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 1,
-                            suggestedMax: 3
-                        }
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "Hair Color"
                         }
                     }]
                 }
@@ -783,58 +465,6 @@
         {% endif %}
 
 
-        {% if bFNameData[3] %}
-        var allBFNameEle = document.getElementById('allFNameBets');
-        var allFNameBets = [];
-        var allFNameCounts = [];
-        var bfnBackgroundColor = [];
-        var bfnBorderColor = [];
-        var bfnColorCount = 0;
-        {% for value in bFNameData[3] %}
-            allFNameCounts.push({{ value[0] }});
-            allFNameBets.push('{{ value[1] }}');
-            bfnBackgroundColor.push(allBackgroundColor[bfnColorCount]);
-            bfnBorderColor.push(allBorderColor[bfnColorCount]);
-            bfnColorCount++;
-            if (bfnColorCount == colorTypes) { bfnColorCount=0; }
-        {% endfor %}
-        var allbFNameChar = new Chart(allBFNameEle, {
-            type: 'horizontalBar',
-            data: {
-                labels: allFNameBets,
-                datasets: [{
-                    data: allFNameCounts,
-                    backgroundColor: bfnBackgroundColor,
-                    borderColor: bfnBorderColor
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "# of Bets"
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 1,
-                            suggestedMax: 3
-                        }
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "First Name Initial"
-                        }
-                    }]
-                }
-            }
-        });
-        {% endif %}
-
         {% if bFNameData[4] %}
         var paidBFNameEle = document.getElementById('paidFNameBets');
         var paidFNameBets = [];
@@ -887,58 +517,6 @@
         });
         {% endif %}
 
-
-    {% if bMNameData[3] %}
-        var allBMNameEle = document.getElementById('allMNameBets');
-        var allMNameBets = [];
-        var allMNameCounts = [];
-        var bmnBackgroundColor = [];
-        var bmnBorderColor = [];
-        var bmnColorCount = 0;
-        {% for value in bMNameData[3] %}
-            allMNameCounts.push({{ value[0] }});
-            allMNameBets.push('{{ value[1] }}');
-            bmnBackgroundColor.push(allBackgroundColor[bmnColorCount]);
-            bmnBorderColor.push(allBorderColor[bmnColorCount]);
-            bmnColorCount++;
-            if (bmnColorCount == colorTypes) { bmnColorCount=0; }
-        {% endfor %}
-        var allbMNameChar = new Chart(allBMNameEle, {
-            type: 'horizontalBar',
-            data: {
-                labels: allMNameBets,
-                datasets: [{
-                    data: allMNameCounts,
-                    backgroundColor: bmnBackgroundColor,
-                    borderColor: bmnBorderColor
-                }]
-            },
-            options: {
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "# of Bets"
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 1,
-                            suggestedMax: 3
-                        }
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: "Middle Name Initial"
-                        }
-                    }]
-                }
-            }
-        });
-        {% endif %}
 
     {% if bMNameData[4] %}
         var paidBMNameEle = document.getElementById('paidMNameBets');
