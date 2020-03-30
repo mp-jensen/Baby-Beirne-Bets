@@ -47,6 +47,22 @@ def placeBets():
         query = 'SELECT userID FROM users WHERE email=%s;'
         testEmail = (request.form['newEmail'],)
         user = execute_query(dbConnection, query, testEmail)
+        # check which bets the user would like to place
+        if 'placeDateBet' in request.form:
+             placeBet['Date'] = True
+        if 'placeTimeBet' in request.form:
+             placeBet['Time'] = True
+        if 'placeWeightBet' in request.form:
+             placeBet['Weight'] = True
+        if 'placeLengthBet' in request.form:
+             placeBet['Length'] = True
+        if 'placeHairBet' in request.form:
+             placeBet['Hair'] = True
+        if 'placeFNameBet' in request.form:
+             placeBet['FName'] = True
+        if 'placeMNameBet' in request.form:
+             placeBet['MName'] = True
+        
         # check if the email is already registered to a user, if not, prompt for user info along with
         # prompting for all bets
         if user.rowcount == 0:
@@ -56,44 +72,37 @@ def placeBets():
             email = testEmail
             userID = user.fetchone()[0]
 
-            if 'placeDateBet' in request.form: 
-                 placeBet['Date'] = True
+            if placeBet['Date']:
                  query = 'SELECT * FROM user_bDate WHERE userID=%s;'
                  if execute_query(dbConnection, query, (userID,)).rowcount > 0:
                      user_bDate = False
 
-            if 'placeTimeBet' in request.form: 
-                 placeBet['Time'] = True
+            if placeBet['Time']:
                  query = 'SELECT * FROM user_bTime WHERE userID=%s;'
                  if execute_query(dbConnection, query, (userID,)).rowcount > 0:
                      user_bTime = False
 
-            if 'placeWeightBet' in request.form: 
-                 placeBet['Weight'] = True
+            if placeBet['Weight']:
                  query = 'SELECT * FROM user_bWeight WHERE userID=%s;'
                  if execute_query(dbConnection, query, (userID,)).rowcount > 0:
                      user_bWeight = False
 
-            if 'placeLengthBet' in request.form:
-                 placeBet['Length'] = True
+            if placeBet['Length']:
                  query = 'SELECT * FROM user_bLength WHERE userID=%s;'
                  if execute_query(dbConnection, query, (userID,)).rowcount > 0:
                      user_bLength = False
 
-            if 'placeHairBet' in request.form:
-                 placeBet['Hair'] = True
+            if placeBet['Hair']:
                  query = 'SELECT * FROM user_bHair WHERE userID=%s;'
                  if execute_query(dbConnection, query, (userID,)).rowcount > 0:
                      user_bHair = False
 
-            if 'placeFNameBet' in request.form:
-                 placeBet['FName'] = True
+            if placeBet['FName']:
                  query = 'SELECT * FROM user_bFName WHERE userID=%s;'
                  if execute_query(dbConnection, query, (userID,)).rowcount > 0:
                      user_bFName = False
 
-            if 'placeMNameBet' in request.form:
-                 placeBet['MName'] = True
+            if placeBet['MName']:
                  query = 'SELECT * FROM user_bMName WHERE userID=%s;'
                  if execute_query(dbConnection, query, (userID,)).rowcount > 0:
                      user_bMName = False
