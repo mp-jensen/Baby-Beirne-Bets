@@ -15,38 +15,41 @@
             </div>
 
             <div class="container">
-                {% if user %}
-                    <p>
-                        Congratulations! You have used a new email to place bets. <strong>Make sure to venmo @Manda-Phadke $2 per category to complete your bets.</strong> You have placed bets in the following categories:
-                    </p>
-                {% else %}
-                    <p>
-                        Congratulations! You have used an existing email to place additional bets in the following categories:
-                    </p>
-                {% endif %}
-                <ul>
-                    {% if bDate %}
-                        <li>Baby's birth date</li>
-                    {% endif %}
-                    {% if bTime %}
-                        <li>Baby's birth time</li>
-                    {% endif %}
-                    {% if bWeight %}
-                        <li>Baby's birth weight</li>
-                    {% endif %}
-                    {% if bLength %}
-                        <li>Baby's birth length</li>
-                    {% endif %}
-                    {% if bHair %}
-                        <li>Baby's hair at birth</li>
-                    {% endif %}
-                    {% if bFName %}
-                        <li>Baby's first name initial</li>
-                    {% endif %}
-                    {% if bMName %}
-                        <li>Baby's middle name initial</li>
-                    {% endif %}
-                </ul>
+                 {% if user %}
+                 <div class="alert alert-warning" role="alert">
+                      <strong>Your bet is not complete yet!</strong> Venmo @Manda-Phadke ${{ betValue }} in order to be eligible to win the pot in each of your bet cateogries!
+                 </div>
+                 <p>
+                      Congratulations! You have used a new email to place bets. <strong>Make sure to venmo @Manda-Phadke $2 per category to complete your bets.</strong> You have placed bets in the following categories:
+                 </p>
+                 {% else %}
+                 <p>
+                      Congratulations! You have used an existing email to place additional bets in the following categories:
+                 </p>
+                 {% endif %}
+                 <ul>
+                      {% if bDate %}
+                      <li>Baby's birth date</li>
+                      {% endif %}
+                      {% if bTime %}
+                      <li>Baby's birth time</li>
+                      {% endif %}
+                      {% if bWeight %}
+                      <li>Baby's birth weight</li>
+                      {% endif %}
+                      {% if bLength %}
+                      <li>Baby's birth length</li>
+                      {% endif %}
+                      {% if bHair %}
+                      <li>Baby's hair at birth</li>
+                      {% endif %}
+                      {% if bFName %}
+                      <li>Baby's first name initial</li>
+                      {% endif %}
+                      {% if bMName %}
+                      <li>Baby's middle name initial</li>
+                      {% endif %}
+                 </ul>
             </div>
         </div>
     {% endif %}

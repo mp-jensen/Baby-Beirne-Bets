@@ -17,7 +17,6 @@ def danAndAsha():
 @app.route('/placeBets', methods=["POST","GET"])
 def placeBets():
     if request.method == "GET":
-        print("request method was GET")
         return render_template('placeBets.html')
 
     # initalize all variables needed if it was a POST request
@@ -42,8 +41,6 @@ def placeBets():
     FNletter = (None,)
     MNletter = (None,)
 
-    print("Content length: {0}".format(request.content_length))
-    print("Data: {0}".format(request.data))
     print("Request.form contains the following: {0}".format(request.form))
     if 'newEmail' in request.form:
         dbConnection = connect_to_database()
@@ -102,30 +99,29 @@ def placeBets():
                      user_bMName = False
 
         # get data to populate bet form with
-        if user_bDate:
+        if user_bDate and placeBet['Date']:
             query = 'SELECT bDateID, date FROM bDate;'
             date = execute_query(dbConnection, query).fetchall()
-        if user_bTime:
+        if user_bTime and placeBet['Time']:
             query = 'SELECT bHourID, hour FROM bHour;'
             hour = execute_query(dbConnection, query).fetchall()
             query = 'SELECT bMinuteID, minute FROM bMinute;'
             minute = execute_query(dbConnection, query).fetchall()
-        if user_bWeight:
+        if user_bWeight and placeBet['Weight']:
             query = 'SELECT bLbID, lb FROM bLb;'
             lb = execute_query(dbConnection, query).fetchall()
             query = 'SELECT bOzID, oz FROM bOz;'
             oz = execute_query(dbConnection, query).fetchall()
-            print("oz request return: {0}".format(oz))
-        if user_bLength:
+        if user_bLength and placeBet['Length']:
             query = 'SELECT bLengthID, inches FROM bLength;'
             inches = execute_query(dbConnection, query).fetchall()
-        if user_bHair:
+        if user_bHair and placeBet['Hair']:
             query = 'SELECT bHairID, hair FROM bHair;'
             hair = execute_query(dbConnection, query).fetchall()
-        if user_bFName:
+        if user_bFName and placeBet['FName']:
             query = 'SELECT bFNameID, letter FROM bFName;'
             FNletter = execute_query(dbConnection, query).fetchall()
-        if user_bMName:
+        if user_bMName and placeBet['MName']:
             query = 'SELECT bMNameID, letter FROM bMName;'
             MNletter = execute_query(dbConnection, query).fetchall()
 
@@ -153,6 +149,7 @@ def betsPlaced():
     bHair = False
     bFName = False
     bMName = False
+    betValue = 0
     dbConnection = connect_to_database()
     # get the information from the form used to place bets and
     # if there is a userID use it to submit the bets, otherwise create a user
@@ -175,38 +172,45 @@ def betsPlaced():
         query = "INSERT INTO user_bDate (userID, bDateID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bDateData)
         bDate = True
+        betValue += 2
     if 'birthHour' in request.form and 'birthMinute' in request.form:
         bTimeData = (userID, request.form['birthHour'], request.form['birthMinute'])
         query = "INSERT INTO user_bTime (userID, bHourID, bMinuteID) VALUES (%s,%s,%s);"
         execute_query(dbConnection, query, bTimeData)
         bTime = True
+        betValue += 2
     if 'birthLb' in request.form and 'birthOz' in request.form:
         bWeightData = (userID, request.form['birthLb'], request.form['birthOz'])
         query = "INSERT INTO user_bWeight (userID, bLbID, bOzID) VALUES (%s,%s,%s);"
         execute_query(dbConnection, query, bWeightData)
         bWeight = True
+        betValue += 2
     if 'birthLength' in request.form:
         bLengthData = (userID, request.form['birthLength'])
         query = "INSERT INTO user_bLength (userID, bLengthID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bLengthData)
         bLength = True
+        betValue += 2
     if 'birthHair' in request.form:
         bHairData = (userID, request.form['birthHair'])
         query = "INSERT INTO user_bHair (userID, bHairID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bHairData)
         bHair = True
+        betValue += 2
     if 'birthFN' in request.form:
         bFNData = (userID, request.form['birthFN'])
         query = "INSERT INTO user_bFName (userID, bFNameID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bFNData)
         bFName = True
+        betValue += 2
     if 'birthMN' in request.form:
         bMNData = (userID, request.form['birthMN'])
         query = "INSERT INTO user_bMName (userID, bMNameID) VALUES (%s,%s);"
         execute_query(dbConnection, query, bMNData)
         bMName= True
+        betValue += 2
 
-    return render_template('betsPlaced.html', user=user, bDate=bDate, bTime=bTime, bWeight=bWeight, bLength=bLength, bHair=bHair, bFName=bFName, bMName=bMName)
+    return render_template('betsPlaced.html', user=user, betValue = betValue, bDate=bDate, bTime=bTime, bWeight=bWeight, bLength=bLength, bHair=bHair, bFName=bFName, bMName=bMName)
 
 
 @app.route('/viewMyBets', methods=["POST","GET"])
