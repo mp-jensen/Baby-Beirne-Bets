@@ -47,8 +47,8 @@
                  <div class="form-group">
                       <label for="newEmail">Email address:</label>
                       <input type="email" name="newEmail" class="form-control" id="newEmail" placeholder="E-mail">
-                      <label class="col-md-4 control-label" for="placeDateBet">Check Which Categories You Want To Place Bets In</label>
-                      <div class="col-md-4">
+                      <label class="col-md-6 control-label" for="placeDateBet">Check Which Categories You Want To Place Bets In</label>
+                      <div class="col-md-6">
                            <div class="checkbox">
                                 <label for="placeDateBet">
                                      <input type="checkbox" name="placeDateBet" id="placeDateBet" />
@@ -185,7 +185,6 @@
                          {% elif placeBet['Length'] %}
                          <p>You have already placed a birth length bet under this email.</p>
                          {% endif %}
-                         <br>
                          {% if user_bHair and placeBet['Hair'] %}
                          <label for="birthHair" class="active">Birth Hair Color</label>
                          <select class="browser-default custom-select mb-4" name="birthHair" id="birthHair" required>
