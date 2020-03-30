@@ -27,7 +27,7 @@
             <div class="page-header">
                 <h2>Place Bets with Email: {{ email[0] }}</h2>
             </div>
-            <h3>To place bets with a different email click <a href="/placeBets">here</a></h3>
+            <h4>To place bets with a different email click <a href="/placeBets">here</a></h4>
         </div>
 
     {%  elif newEmail %}
@@ -35,7 +35,7 @@
             <div class="page-header">
                 <h2>Place Bets with Email: {{ newEmail[0] }}</h2>
             </div>
-            <h3>To place bets with a different email click <a href="/placeBets">here</a></h3>
+            <h4>To place bets with a different email click <a href="/placeBets">here</a></h4>
         </div>
 
     {% else %}
@@ -106,15 +106,15 @@
     {% endif %}
 
     {% if email or newEmail %}
+<br />
         <div class="container">
              <form class="border border-light p-5" action="/betsPlaced" method="POST">
-                  <p class="h4 mb-4 text-center">Place Bets</p>
                   {% if email %}
                   <input type="text" value={{ email[0] }} name="submitEmail" id="submitEmail" hidden>
                   <input type="text" value={{ userID }} name="userID" id="userID" hidden>
                   {% else %}
                   <input type="text" value={{ newEmail[0] }} name="submitEmail" id="submitEmail" hidden>
-                  <p class="h5 mb-4 text-center">Enter User's Information</p>
+                  <p class="h2 page-header text-center">Enter User's Information</p>
                   <div class="form-group">
                        <label for="firstName" class="active">First Name</label>
                        <input type="text" name="firstName" id="firstName" class="form-control mb-4" placeholder="Enter user's first name" required>
@@ -125,6 +125,7 @@
                   </div>
                   {% endif %}
                   <br>
+                  <p class="h2 page-header text-center">Place Bets</p>
                   {% if user_bDate and placeBet['Date'] %}
                   <div class="form-group">
                        <label for="birthDate" class="active">Birth Date</label>
