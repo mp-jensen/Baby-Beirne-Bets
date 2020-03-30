@@ -48,8 +48,10 @@
                       <label for="newEmail">Email address:</label>
                       <input type="email" name="newEmail" class="form-control" id="newEmail" placeholder="E-mail">
                       <br />
-                      <label class="col-md-4 control-label text-right" for="placeDateBet">Check Which Categories You Want To Place Bets In:</label>
-                      <div class="col-md-6">
+                 </div>
+                 <div class="form-group">
+                      <label class="col-md-11 col-md-offset-1 control-label" for="placeDateBet">Check Which Categories You Want To Place Bets In:</label>
+                      <div class="col-md-12">
                            <div class="checkbox">
                                 <label for="placeDateBet">
                                      <input type="checkbox" name="placeDateBet" id="placeDateBet" />
@@ -95,8 +97,8 @@
                       </div>
                  </div>
                  <br />
-                 <div class="row col-md-2 col-md-offset-5">
-                      <button type="submit" class="btn btn-default" value="submitEmail">Submit</button>
+                 <div class="row">
+                      <button type="submit" class="btn btn-success" value="submitEmail">Submit</button>
                  </div>
             </form>
             <br>
@@ -107,25 +109,24 @@
         <div class="container">
             <form class="border border-light p-5" action="/betsPlaced" method="POST">
                 <p class="h4 mb-4 text-center">Place Bets</p>
-                <div class="form-group">
-                    {% if email %}
-                        <input type="text" value={{ email[0] }} name="submitEmail" id="submitEmail" hidden>
-                        <input type="text" value={{ userID }} name="userID" id="userID" hidden>
-                    {% else %}
-                        <input type="text" value={{ newEmail[0] }} name="submitEmail" id="submitEmail" hidden>
-                        <div class="border border-light p-5">
-                            <p class="h5 mb-4 text-center">Enter User's Information</p>
-                            <label for="firstName" class="active">First Name</label>
-                            <input type="text" name="firstName" id="firstName" class="form-control mb-4" placeholder="Enter user's first name" required>
-
-                            <label for="lastName" class="active">Last Name</label>
-                            <input type="text" name="lastName" id="lastName" class="form-control mb-4" placeholder="Enter user's last name" required>
-                        </div>
-                    {% endif %}
-                    <br>
-                    <div class="border border-light p-5">
-                         <p class="h5 mb-4 text-center">Enter Bets</p>
-                         {% if user_bDate and placeBet['Date'] %}
+               {% if email %}
+                    <input type="text" value={{ email[0] }} name="submitEmail" id="submitEmail" hidden>
+                    <input type="text" value={{ userID }} name="userID" id="userID" hidden>
+               {% else %}
+                    <input type="text" value={{ newEmail[0] }} name="submitEmail" id="submitEmail" hidden>
+                    <p class="h5 mb-4 text-center">Enter User's Information</p>
+                    <div class="form-group">
+                         <label for="firstName" class="active">First Name</label>
+                         <input type="text" name="firstName" id="firstName" class="form-control mb-4" placeholder="Enter user's first name" required>
+                    </div>
+                    <div class="form-group">
+                         <label for="lastName" class="active">Last Name</label>
+                         <input type="text" name="lastName" id="lastName" class="form-control mb-4" placeholder="Enter user's last name" required>
+                    </div>
+               {% endif %}
+               <br>
+                    {% if user_bDate and placeBet['Date'] %}
+                    <div class="form-group">
                          <label for="birthDate" class="active">Birth Date</label>
                          <select class="browser-default custom-select mb-4" name="birthDate" id="birthDate" required>
                               <option value="" disabled="" selected="">Choose the date</option>
@@ -133,12 +134,14 @@
                               <option value="{{ day[0] }}">{{ day[1] }}</option>
                               {% endfor %}
                          </select>
-                         <br />
-                         {% elif placeBet['Date'] %}
-                         <p>You have already placed a birth date bet under this email.</p>
-                         {% endif %}
+                    </div>
+                    <br />
+                    {% elif placeBet['Date'] %}
+                    <p>You have already placed a birth date bet under this email.</p>
+                    {% endif %}
 
-                         {% if user_bTime and placeBet['Time'] %}
+                    {% if user_bTime and placeBet['Time'] %}
+                    <div class="form-group">
                          <label for="birthHour" class="active">Birth Time</label>
                          <select class="browser-default custom-select mb-4" name="birthHour" id="birthHour" required>
                               <option value="" disabled="" selected="">Hour</option>
@@ -152,11 +155,13 @@
                               <option value="{{ time[0] }}">{{ time[1] }}</option>
                               {% endfor %}
                          </select>
-                         <br />
-                         {% elif placeBet['Time'] %}
-                         <p>You have already placed a birth time bet under this email.</p>
-                         {% endif %}
-                         {% if user_bWeight and placeBet['Weight'] %}
+                    </div>
+                    <br />
+                    {% elif placeBet['Time'] %}
+                    <p>You have already placed a birth time bet under this email.</p>
+                    {% endif %}
+                    {% if user_bWeight and placeBet['Weight'] %}
+                    <div class="form-group">
                          <label for="birthLb" class="active">Birth Weight</label>
                          <select class="browser-default custom-select mb-4" name="birthLb" id="birthLb" required>
                               <option value="" disabled="" selected="">Pounds</option>
@@ -170,11 +175,13 @@
                               <option value="{{ ounce[0] }}">{{ ounce[1] }}</option>
                               {% endfor %}
                          </select>
-                         <br />
-                         {% elif placeBet['Weight'] %}
-                         <p>You have already placed a birth weight bet under this email.</p>
-                         {% endif %}
-                         {% if user_bLength and placeBet['Length'] %}
+                    </div>
+                    <br />
+                    {% elif placeBet['Weight'] %}
+                    <p>You have already placed a birth weight bet under this email.</p>
+                    {% endif %}
+                    {% if user_bLength and placeBet['Length'] %}
+                    <div class="form-group">
                          <label for="birthLength" class="active">Birth Length</label>
                          <select class="browser-default custom-select mb-4" name="birthLength" id="birthLength" required>
                               <option value="" disabled="" selected="">Inches</option>
@@ -182,11 +189,13 @@
                               <option value="{{ length[0] }}">{{ length[1] }}</option>
                               {% endfor %}
                          </select>
-                         <br />
-                         {% elif placeBet['Length'] %}
-                         <p>You have already placed a birth length bet under this email.</p>
-                         {% endif %}
-                         {% if user_bHair and placeBet['Hair'] %}
+                    </div>
+                    <br />
+                    {% elif placeBet['Length'] %}
+                    <p>You have already placed a birth length bet under this email.</p>
+                    {% endif %}
+                    {% if user_bHair and placeBet['Hair'] %}
+                    <div class="form-group">
                          <label for="birthHair" class="active">Birth Hair Color</label>
                          <select class="browser-default custom-select mb-4" name="birthHair" id="birthHair" required>
                               <option value="" disabled="" selected="">Color</option>
@@ -194,11 +203,13 @@
                               <option value="{{ color[0] }}">{{ color[1] }}</option>
                               {% endfor %}
                          </select>
-                         <br />
-                         {% elif placeBet['Hair'] %}
-                         <p>You have already placed a hair color bet under this email.</p>
-                         {% endif %}
-                         {% if user_bFName and placeBet['FName'] %}
+                    </div>
+                    <br />
+                    {% elif placeBet['Hair'] %}
+                    <p>You have already placed a hair color bet under this email.</p>
+                    {% endif %}
+                    {% if user_bFName and placeBet['FName'] %}
+                    <div class="form-group">
                          <label for="birthFN" class="active">Baby's First Name Initial</label>
                          <select class="browser-default custom-select mb-4" name="birthFN" id="birthFN" required>
                               <option value="" disabled="" selected="">Initial</option>
@@ -206,11 +217,13 @@
                               <option value="{{ initial[0] }}">{{ initial[1] }}</option>
                               {% endfor %}
                          </select>
-                         <br />
-                         {% elif placeBet['FName'] %}
-                         <p>You have already placed a first initial bet under this email.</p>
-                         {% endif %}
-                         {% if user_bMName and placeBet['MName'] %}
+                    </div>
+                    <br />
+                    {% elif placeBet['FName'] %}
+                    <p>You have already placed a first initial bet under this email.</p>
+                    {% endif %}
+                    {% if user_bMName and placeBet['MName'] %}
+                    <div class="form-group">
                          <label for="birthMN" class="active">Baby's Middle Name Initial</label>
                          <select class="browser-default custom-select mb-4" name="birthMN" id="birthMN" required>
                               <option value="" disabled="" selected="">Initial</option>
@@ -218,16 +231,13 @@
                               <option value="{{ initial[0] }}">{{ initial[1] }}</option>
                               {% endfor %}
                          </select>
-                         <br />
-                         {% elif placeBet['MName'] %}
-                         <p>You have already placed a middle initial bet under this email.</p>
-                         {% endif %}
-                         <br>
                     </div>
-
+                    <br />
+                    {% elif placeBet['MName'] %}
+                    <p>You have already placed a middle initial bet under this email.</p>
+                    {% endif %}
+                    <br>
                     <button class="btn btn-info btn-block" type="submit" id="submitBet" name="submitBets" value="submitBets">Submit Bets</button>
-
-                </div>
             </form>
         </div>
     {% endif %}
