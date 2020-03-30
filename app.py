@@ -16,7 +16,6 @@ def danAndAsha():
 
 @app.route('/placeBets', methods=["POST","GET"])
 def placeBets():
-    print("I am in the placeBets route")
     if request.method == "GET":
         print("request method was GET")
         return render_template('placeBets.html')
@@ -25,6 +24,7 @@ def placeBets():
     email = False
     newEmail = False
     userID = False
+    placeBet = {'Date': False, 'Time': False, 'Weight': False, 'Length': False, 'Hair': False, 'FName': False, 'MName': False}
     user_bDate = True
     user_bTime = True
     user_bWeight = True
@@ -59,33 +59,47 @@ def placeBets():
             email = testEmail
             userID = user.fetchone()[0]
 
-            query = 'SELECT * FROM user_bDate WHERE userID=%s;'
-            if execute_query(dbConnection, query, (userID,)).rowcount > 0:
-                user_bDate = False
+            if 'placeDateBet' in request.form: 
+                 placeBet['Date'] = True
+                 query = 'SELECT * FROM user_bDate WHERE userID=%s;'
+                 if execute_query(dbConnection, query, (userID,)).rowcount > 0:
+                     user_bDate = False
 
-            query = 'SELECT * FROM user_bTime WHERE userID=%s;'
-            if execute_query(dbConnection, query, (userID,)).rowcount > 0:
-                user_bTime = False
+            if 'placeTimeBet' in request.form: 
+                 placeBet['Time'] = True
+                 query = 'SELECT * FROM user_bTime WHERE userID=%s;'
+                 if execute_query(dbConnection, query, (userID,)).rowcount > 0:
+                     user_bTime = False
 
-            query = 'SELECT * FROM user_bWeight WHERE userID=%s;'
-            if execute_query(dbConnection, query, (userID,)).rowcount > 0:
-                user_bWeight = False
+            if 'placeWeightBet' in request.form: 
+                 placeBet['Weight'] = True
+                 query = 'SELECT * FROM user_bWeight WHERE userID=%s;'
+                 if execute_query(dbConnection, query, (userID,)).rowcount > 0:
+                     user_bWeight = False
 
-            query = 'SELECT * FROM user_bLength WHERE userID=%s;'
-            if execute_query(dbConnection, query, (userID,)).rowcount > 0:
-                user_bLength = False
+            if 'placeLengthBet' in request.form:
+                 placeBet['Length'] = True
+                 query = 'SELECT * FROM user_bLength WHERE userID=%s;'
+                 if execute_query(dbConnection, query, (userID,)).rowcount > 0:
+                     user_bLength = False
 
-            query = 'SELECT * FROM user_bHair WHERE userID=%s;'
-            if execute_query(dbConnection, query, (userID,)).rowcount > 0:
-                user_bHair = False
+            if 'placeHairBet' in request.form:
+                 placeBet['Hair'] = True
+                 query = 'SELECT * FROM user_bHair WHERE userID=%s;'
+                 if execute_query(dbConnection, query, (userID,)).rowcount > 0:
+                     user_bHair = False
 
-            query = 'SELECT * FROM user_bFName WHERE userID=%s;'
-            if execute_query(dbConnection, query, (userID,)).rowcount > 0:
-                user_bFName = False
+            if 'placeFNameBet' in request.form:
+                 placeBet['FName'] = True
+                 query = 'SELECT * FROM user_bFName WHERE userID=%s;'
+                 if execute_query(dbConnection, query, (userID,)).rowcount > 0:
+                     user_bFName = False
 
-            query = 'SELECT * FROM user_bMName WHERE userID=%s;'
-            if execute_query(dbConnection, query, (userID,)).rowcount > 0:
-                user_bMName = False
+            if 'placeMNameBet' in request.form:
+                 placeBet['MName'] = True
+                 query = 'SELECT * FROM user_bMName WHERE userID=%s;'
+                 if execute_query(dbConnection, query, (userID,)).rowcount > 0:
+                     user_bMName = False
 
         # get data to populate bet form with
         if user_bDate:
@@ -119,7 +133,7 @@ def placeBets():
         # true/false values on whether or not the user has a bet yet and
         # option values for bets
         print("userID in placeBets: {0}".format(userID))
-        return render_template('placeBets.html', userID=userID, email=email, newEmail=newEmail, user_bDate=user_bDate, user_bTime=user_bTime, user_bWeight=user_bWeight, user_bLength=user_bLength, user_bHair=user_bHair, user_bFName=user_bFName, user_bMName=user_bMName, date=date, hour=hour, minute=minute, lb=lb, oz=oz, inches=inches, hair=hair, FNletter=FNletter, MNletter=MNletter)
+        return render_template('placeBets.html', userID=userID, email=email, newEmail=newEmail, placeBet=placeBet, user_bDate=user_bDate, user_bTime=user_bTime, user_bWeight=user_bWeight, user_bLength=user_bLength, user_bHair=user_bHair, user_bFName=user_bFName, user_bMName=user_bMName, date=date, hour=hour, minute=minute, lb=lb, oz=oz, inches=inches, hair=hair, FNletter=FNletter, MNletter=MNletter)
 
     else:
         return render_template('placeBets.html')
