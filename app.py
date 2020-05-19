@@ -516,13 +516,13 @@ def viewPaidBets():
 def winners():
     dbConnection = connect_to_database()
 
-    bdWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bdate ubd on u.userID = ubd.userID inner join winners w on w.bDateID = ubd.bDateID where ubd.paidStatus=1;")
-    bwWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bweight ubw on u.userID = ubw.userID inner join winners w on w.bOzID = ubw.bOzID and w.bLbID = ubw.bLbID where ubw.paidStatus=1;")
-    btWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_btime ubt on u.userID = ubt.userID inner join winners w on w.bHourID = ubt.bHourID and w.bMinuteID = ubt.bMinuteID where ubt.paidStatus=1;")
-    blWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_blength ubl on u.userID = ubl.userID inner join winners w on w.bLengthID = ubl.bLengthID and where ubl.paidStatus=1;")
-    bhWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bhair ubh on u.userID = ubh.userID inner join winners w on w.bHairID = ubh.bHairID and where ubh.paidStatus=1;")
-    bfnWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bfname ufn on u.userID = ufn.userID inner join winners w on w.bFNameID = ufn.bFNameID and where ufn.paidStatus=1;")
-    bmnWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bmname umn on u.userID = umn.userID inner join winners w on w.bMNameID = umn.bMNameID and where umn.paidStatus=1;")
+    bdWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bdate ubd on u.userID = ubd.userID inner join winners w on w.bDateID = ubd.bDateID where ubd.paidStatus=1;").fetchall()
+    bwWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bweight ubw on u.userID = ubw.userID inner join winners w on w.bOzID = ubw.bOzID and w.bLbID = ubw.bLbID where ubw.paidStatus=1;").fetchall()
+    btWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_btime ubt on u.userID = ubt.userID inner join winners w on w.bHourID = ubt.bHourID and w.bMinuteID = ubt.bMinuteID where ubt.paidStatus=1;").fetchall()
+    blWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_blength ubl on u.userID = ubl.userID inner join winners w on w.bLengthID = ubl.bLengthID and where ubl.paidStatus=1;").fetchall()
+    bhWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bhair ubh on u.userID = ubh.userID inner join winners w on w.bHairID = ubh.bHairID and where ubh.paidStatus=1;").fetchall()
+    bfnWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bfname ufn on u.userID = ufn.userID inner join winners w on w.bFNameID = ufn.bFNameID and where ufn.paidStatus=1;").fetchall()
+    bmnWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bmname umn on u.userID = umn.userID inner join winners w on w.bMNameID = umn.bMNameID and where umn.paidStatus=1;").fetchall()
 
     return render_template('winners.html', bdWinners=bdWinners, bwWinners=bwWinners, btWinners=btWinners, blWinners=blWinners, bhWinners=bhWinners, bfnWinners=bfnWinners, bmnWinners=bmnWinners)
 
@@ -530,14 +530,14 @@ def winners():
 def admin():
     dbConnection = connect_to_database()
 
-    bdWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_bdate ubd on u.userID = ubd.userID inner join winners w on w.bDateID = ubd.bDateID where ubd.paidStatus=1;")
-    bwWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_bweight ubw on u.userID = ubw.userID inner join winners w on w.bOzID = ubw.bOzID and w.bLbID = ubw.bLbID where ubw.paidStatus=1;")
-    btWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_btime ubt on u.userID = ubt.userID inner join winners w on w.bHourID = ubt.bHourID and w.bMinuteID = ubt.bMinuteID where ubt.paidStatus=1;")
-    blWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_blength ubl on u.userID = ubl.userID inner join winners w on w.bLengthID = ubl.bLengthID and where ubl.paidStatus=1;")
-    bhWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_bhair ubh on u.userID = ubh.userID inner join winners w on w.bHairID = ubh.bHairID and where ubh.paidStatus=1;")
-    bfnWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_bfname ufn on u.userID = ufn.userID inner join winners w on w.bFNameID = ufn.bFNameID and where ufn.paidStatus=1;")
-    bmnWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_bmname umn on u.userID = umn.userID inner join winners w on w.bMNameID = umn.bMNameID and where umn.paidStatus=1;")
-    userEmails = execute_query(dbConnection, "SELECT email FROM users;")
+    bdWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_bdate ubd on u.userID = ubd.userID inner join winners w on w.bDateID = ubd.bDateID where ubd.paidStatus=1;").fetchall()
+    bwWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_bweight ubw on u.userID = ubw.userID inner join winners w on w.bOzID = ubw.bOzID and w.bLbID = ubw.bLbID where ubw.paidStatus=1;").fetchall()
+    btWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_btime ubt on u.userID = ubt.userID inner join winners w on w.bHourID = ubt.bHourID and w.bMinuteID = ubt.bMinuteID where ubt.paidStatus=1;").fetchall()
+    blWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_blength ubl on u.userID = ubl.userID inner join winners w on w.bLengthID = ubl.bLengthID and where ubl.paidStatus=1;").fetchall()
+    bhWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_bhair ubh on u.userID = ubh.userID inner join winners w on w.bHairID = ubh.bHairID and where ubh.paidStatus=1;").fetchall()
+    bfnWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_bfname ufn on u.userID = ufn.userID inner join winners w on w.bFNameID = ufn.bFNameID and where ufn.paidStatus=1;").fetchall()
+    bmnWinners = execute_query(dbConnection, "SELECT u.firstName, u.lastName, u.email FROM users u inner join user_bmname umn on u.userID = umn.userID inner join winners w on w.bMNameID = umn.bMNameID and where umn.paidStatus=1;").fetchall()
+    userEmails = execute_query(dbConnection, "SELECT email FROM users;").fetchall()
 
     print("birth date winners: {0}".format(bdWinners))
     print("birth weight winners: {0}".format(bwWinners))
