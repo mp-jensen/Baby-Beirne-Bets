@@ -514,7 +514,17 @@ def viewPaidBets():
 
 @app.route('/winners')
 def winners():
-    return render_template('winners.html')
+    dbConnection = connect_to_database()
+
+    bdWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bdate ubd on u.userID = ubd.userID inner join winners w on w.bDateID = ubd.bDateID where ubd.paidStatus=1;")
+    bwWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bweight ubw on u.userID = ubw.userID inner join winners w on w.bOzID = ubw.bOzID and w.bLbID = ubw.bLbID where ubw.paidStatus=1;")
+    btWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_btime ubt on u.userID = ubt.userID inner join winners w on w.bHourID = ubt.bHourID and w.bMinuteID = ubt.bMinuteID where ubt.paidStatus=1;")
+    blWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_blength ubl on u.userID = ubl.userID inner join winners w on w.bLengthID = ubl.bLengthID and where ubl.paidStatus=1;")
+    bhWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bhair ubh on u.userID = ubh.userID inner join winners w on w.bHairID = ubh.bHairID and where ubh.paidStatus=1;")
+    bfnWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bfname ufn on u.userID = ufn.userID inner join winners w on w.bFNameID = ufn.bFNameID and where ufn.paidStatus=1;")
+    bmnWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bmname umn on u.userID = umn.userID inner join winners w on w.bMNameID = umn.bMNameID and where umn.paidStatus=1;")
+
+    return render_template('winners.html', bdWinners=bdWinners, bwWinners=bwWinners, btWinners=btWinners, blWinners=blWinners, bhWinners=bhWinners, bfnWinners=bfnWinners, bmnWinners=bmnWinners)
 
 
 if __name__ == '__main__': app.run(debug=True)

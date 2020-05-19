@@ -4,11 +4,106 @@
 
 {% block content %}
 
-    <div class="container">
-        <div class="page-header">
-            <h2>No Winners Have Been Selected Yet</h2>
-        </div>
-        <p>Please check back after the baby has been born. All users will be notified by email when the winners have been posted.</p>
+<div class="container">
+    <div class="page-header">
+        <h1>Winners</h1>
     </div>
+    <p>
+        The winners have been selected based on the rules laid out at the start (winners must have paid their bet and the closest answer wins if there are no correct answers)! Winners are listed below by their first name, winners will recieve their portion of the pot to the venmo they used to submit thier bet.<br>
+        Congratulations to all the winners!
+    </p>
+</div>
 
+<div class="container">
+    <div class="page-header">
+        <h3>Birth Date</h3>
+    </div>
+    <p>Actual & Winning Answer: April 15th</p>
+    <p>Winners</p>
+    <ul>
+        {% for name in bdWinners %}
+        <li>{{name}}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="container">
+    <div class="page-header">
+        <h3>Birth Time</h3>
+    </div>
+    <p>Actual Answer: 17:10</p>
+    <p>Winning Answer: 16:10</p>
+    <p>Winners</p>
+    <ul>
+        {% for name in btWinners %}
+        <li>{{name}}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="container">
+    <div class="page-header">
+        <h3>Birth Weight</h3>
+    </div>
+    <p>Actual Answer: 7 lbs 15 oz</p>
+    <p>Winning Answer: 8 lbs 0 oz</p>
+    <p>Winners</p>
+    <ul>
+        {% for name in bwWinners %}
+        <li>{{name}}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="container">
+    <div class="page-header">
+        <h3>Birth Length</h3>
+    </div>
+    <p>Actual & Winning Answer: 21 inches</p>
+    <p>Winners</p>
+    <ul>
+        {% for name in blWinners %}
+        <li>{{name}}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="container">
+    <div class="page-header">
+        <h3>Birth Hair</h3>
+    </div>
+    <p>Actual & Winning Answer: Brown</p>
+    <p>Winners</p>
+    <ul>
+        {% for name in bhWinners %}
+        <li>{{name}}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="container">
+    <div class="page-header">
+        <h3>First Initial</h3>
+    </div>
+    <p>Actual & Winning Answer: A</p>
+    <p>Winners</p>
+    <ul>
+        {% for name in bfnWinners %}
+        <li>{{name}}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="container">
+    <div class="page-header">
+        <h3>Middle Initial</h3>
+    </div>
+    <p>Actual & Winning Answer: J</p>
+    <p>Winners</p>
+    <ul>
+        {% for name in bmnWinners %}
+        <li>{{name}}</li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
