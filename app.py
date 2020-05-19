@@ -524,7 +524,15 @@ def winners():
     bfnWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bfname ufn on u.userID = ufn.userID inner join winners w on w.bFNameID = ufn.bFNameID where ufn.paidStatus=1;").fetchall()
     bmnWinners = execute_query(dbConnection, "SELECT u.firstName FROM users u inner join user_bmname umn on u.userID = umn.userID inner join winners w on w.bMNameID = umn.bMNameID where umn.paidStatus=1;").fetchall()
 
-    return render_template('winners.html', bdWinners=bdWinners, bwWinners=bwWinners, btWinners=btWinners, blWinners=blWinners, bhWinners=bhWinners, bfnWinners=bfnWinners, bmnWinners=bmnWinners)
+    bdValue = round(float(execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bDate WHERE paidStatus > 0;").fetchone()[0])/len(bdWinners),2)
+    bwValue = round(float(execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bWeight WHERE paidStatus > 0;").fetchone()[0])/len(bwWinners),2)
+    btValue = round(float(execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bTime WHERE paidStatus > 0;").fetchone()[0])/len(btWinners),2)
+    blValue = round(float(execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bLength WHERE paidStatus > 0;").fetchone()[0])/len(blWinners),2)
+    bhValue = round(float(execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bHair WHERE paidStatus > 0;").fetchone()[0])/len(bhWinners),2)
+    bfnValue = round(float(execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bFName WHERE paidStatus > 0;").fetchone()[0])/len(bfnWinners),2)
+    bmnValue = round(float(execute_query(dbConnection, "SELECT sum(amountPaid) FROM user_bMName WHERE paidStatus > 0;").fetchone()[0])/len(bmnWinners),2)
+
+    return render_template('winners.html', bdWinners=bdWinners, bwWinners=bwWinners, btWinners=btWinners, blWinners=blWinners, bhWinners=bhWinners, bfnWinners=bfnWinners, bmnWinners=bmnWinners, bdValue=bdValue, btValue=btValue, bwValue=bwValue, blValue=blValue, bhValue=bhValue, bfnValue=bfnValue, bmnValue=bmnValue)
 
 @app.route('/admin')
 def admin():
